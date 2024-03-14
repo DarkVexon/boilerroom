@@ -15,9 +15,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+
 import java.util.function.Consumer;
-import code.CharacterFile;
-import code.util.CardArtRoller;
 
 import static code.ModFile.makeImagePath;
 import static code.ModFile.modID;
@@ -32,25 +31,8 @@ public abstract class AbstractEasyCard extends CustomCard {
     public boolean upgradedSecondMagic;
     public boolean isSecondMagicModified;
 
-    public int thirdMagic;
-    public int baseThirdMagic;
-    public boolean upgradedThirdMagic;
-    public boolean isThirdMagicModified;
-
-    public int secondDamage;
-    public int baseSecondDamage;
-    public boolean upgradedSecondDamage;
-    public boolean isSecondDamageModified;
-
-    public int secondBlock;
-    public int baseSecondBlock;
-    public boolean upgradedSecondBlock;
-    public boolean isSecondBlockModified;
-
-    private boolean needsArtRefresh = false;
-
     public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
-        this(cardID, cost, type, rarity, target, CharacterFile.Enums.TODO_COLOR);
+        this(cardID, cost, type, rarity, target, CardColor.COLORLESS);
     }
 
     public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
@@ -61,22 +43,6 @@ public abstract class AbstractEasyCard extends CustomCard {
         name = originalName = cardStrings.NAME;
         initializeTitle();
         initializeDescription();
-
-        if (textureImg.contains("ui/missing.png")) {
-            if (CardLibrary.cards != null && !CardLibrary.cards.isEmpty()) {
-                CardArtRoller.computeCard(this);
-            } else
-                needsArtRefresh = true;
-        }
-    }
-
-    @Override
-    protected Texture getPortraitImage() {
-        if (textureImg.contains("ui/missing.png")) {
-            return CardArtRoller.getPortraitTexture(this);
-        } else {
-            return super.getPortraitImage();
-        }
     }
 
     public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType) {
@@ -100,73 +66,11 @@ public abstract class AbstractEasyCard extends CustomCard {
         return textureString;
     }
 
-    @Override
-    public void applyPowers() {
-        if (baseSecondDamage > -1) {
-            secondDamage = baseSecondDamage;
-
-            int tmp = baseDamage;
-            baseDamage = baseSecondDamage;
-
-            super.applyPowers();
-
-            secondDamage = damage;
-            baseDamage = tmp;
-
-            super.applyPowers();
-
-            isSecondDamageModified = (secondDamage != baseSecondDamage);
-        } else super.applyPowers();
-    }
-
-    @Override
-    protected void applyPowersToBlock() {
-        if (baseSecondBlock > -1) {
-            secondBlock = baseSecondBlock;
-
-            int tmp = baseBlock;
-            baseBlock = baseSecondBlock;
-
-            super.applyPowersToBlock();
-
-            secondBlock = block;
-            baseBlock = tmp;
-
-            super.applyPowersToBlock();
-
-            isSecondBlockModified = (secondBlock != baseSecondBlock);
-        } else super.applyPowersToBlock();
-    }
-
-    @Override
-    public void calculateCardDamage(AbstractMonster mo) {
-        if (baseSecondDamage > -1) {
-            secondDamage = baseSecondDamage;
-
-            int tmp = baseDamage;
-            baseDamage = baseSecondDamage;
-
-            super.calculateCardDamage(mo);
-
-            secondDamage = damage;
-            baseDamage = tmp;
-
-            super.calculateCardDamage(mo);
-
-            isSecondDamageModified = (secondDamage != baseSecondDamage);
-        } else super.calculateCardDamage(mo);
-    }
 
     public void resetAttributes() {
         super.resetAttributes();
         secondMagic = baseSecondMagic;
         isSecondMagicModified = false;
-        thirdMagic = baseThirdMagic;
-        isThirdMagicModified = false;
-        secondDamage = baseSecondDamage;
-        isSecondDamageModified = false;
-        secondBlock = baseSecondBlock;
-        isSecondBlockModified = false;
     }
 
     public void displayUpgrades() {
@@ -174,18 +78,6 @@ public abstract class AbstractEasyCard extends CustomCard {
         if (upgradedSecondMagic) {
             secondMagic = baseSecondMagic;
             isSecondMagicModified = true;
-        }
-        if (upgradedThirdMagic) {
-            thirdMagic = baseThirdMagic;
-            isThirdMagicModified = true;
-        }
-        if (upgradedSecondDamage) {
-            secondDamage = baseSecondDamage;
-            isSecondDamageModified = true;
-        }
-        if (upgradedSecondBlock) {
-            secondBlock = baseSecondBlock;
-            isSecondBlockModified = true;
         }
     }
 
@@ -195,23 +87,6 @@ public abstract class AbstractEasyCard extends CustomCard {
         upgradedSecondMagic = true;
     }
 
-    protected void upgradeThirdMagic(int amount) {
-        baseThirdMagic += amount;
-        thirdMagic = baseThirdMagic;
-        upgradedThirdMagic = true;
-    }
-
-    protected void upgradeSecondDamage(int amount) {
-        baseSecondDamage += amount;
-        secondDamage = baseSecondDamage;
-        upgradedSecondDamage = true;
-    }
-
-    protected void upgradeSecondBlock(int amount) {
-        baseSecondBlock += amount;
-        secondBlock = baseSecondBlock;
-        upgradedSecondBlock = true;
-    }
 
     protected void uDesc() {
         this.rawDescription = this.cardStrings.UPGRADE_DESCRIPTION;
@@ -230,20 +105,11 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     public abstract void upp();
 
-    public void update() {
-        super.update();
-        if (needsArtRefresh)
-            CardArtRoller.computeCard(this);
-    }
-
     public AbstractCard makeStatEquivalentCopy() {
         AbstractCard result = super.makeStatEquivalentCopy();
         if (result instanceof AbstractEasyCard) {
             AbstractEasyCard c = (AbstractEasyCard) result;
-            c.baseSecondDamage = c.secondDamage = baseSecondDamage;
-            c.baseSecondBlock = c.secondBlock = baseSecondBlock;
             c.baseSecondMagic = c.secondMagic = baseSecondMagic;
-            c.baseThirdMagic = c.thirdMagic = baseThirdMagic;
         }
         return result;
     }
@@ -263,14 +129,6 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     protected void allDmgTop(AbstractGameAction.AttackEffect fx) {
         att(new DamageAllEnemiesAction(AbstractDungeon.player, multiDamage, damageTypeForTurn, fx));
-    }
-
-    protected void altDmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
-        atb(new DamageAction(m, new DamageInfo(AbstractDungeon.player, secondDamage, damageTypeForTurn), fx));
-    }
-
-    protected void altDmgTop(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
-        att(new DamageAction(m, new DamageInfo(AbstractDungeon.player, secondDamage, damageTypeForTurn), fx));
     }
 
     private AbstractGameAction dmgRandomAction(AbstractGameAction.AttackEffect fx, Consumer<AbstractMonster> extraEffectToTarget, Consumer<AbstractMonster> effectBefore) {
@@ -309,21 +167,5 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     protected void blckTop() {
         att(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
-    }
-
-    protected void altBlck() {
-        atb(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, secondBlock));
-    }
-
-    protected void altBlckTop() {
-        att(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, secondBlock));
-    }
-
-    public String cardArtCopy() {
-        return null;
-    }
-
-    public CardArtRoller.ReskinInfo reskinInfo(String ID) {
-        return null;
     }
 }

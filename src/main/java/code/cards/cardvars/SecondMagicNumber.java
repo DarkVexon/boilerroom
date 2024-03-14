@@ -1,11 +1,12 @@
 package code.cards.cardvars;
 
+import basemod.abstracts.DynamicVariable;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import code.cards.AbstractEasyCard;
 
 import static code.ModFile.makeID;
 
-public class SecondMagicNumber extends AbstractEasyDynamicVariable {
+public class SecondMagicNumber extends DynamicVariable {
 
     @Override
     public String key() {
