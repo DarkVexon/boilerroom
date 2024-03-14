@@ -2,7 +2,6 @@ package code;
 
 import basemod.AutoAdd;
 import basemod.BaseMod;
-import basemod.abstracts.DynamicVariable;
 import basemod.helpers.RelicType;
 import basemod.interfaces.EditCardsSubscriber;
 import basemod.interfaces.EditKeywordsSubscriber;
@@ -25,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @SpireInitializer
-public class ModFile implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber {
+public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber {
 
     public static final String modID = "boiler";
 
@@ -44,7 +43,7 @@ public class ModFile implements EditCardsSubscriber, EditRelicsSubscriber, EditS
         return "eng";
     }
 
-    public ModFile() {
+    public BoilerRoomMod() {
         BaseMod.subscribe(this);
     }
 
@@ -73,7 +72,7 @@ public class ModFile implements EditCardsSubscriber, EditRelicsSubscriber, EditS
     }
 
     public static void initialize() {
-        ModFile thismod = new ModFile();
+        BoilerRoomMod thismod = new BoilerRoomMod();
     }
 
     @Override
@@ -92,7 +91,6 @@ public class ModFile implements EditCardsSubscriber, EditRelicsSubscriber, EditS
 
     @Override
     public void receiveEditCards() {
-        new AutoAdd(modID).packageFilter(AbstractEasyDynamicVariable.class).any(DynamicVariable.class, (info, var) -> BaseMod.addDynamicVariable(var));
         new AutoAdd(modID).packageFilter(AbstractEasyCard.class).setDefaultSeen(true).cards();
     }
 

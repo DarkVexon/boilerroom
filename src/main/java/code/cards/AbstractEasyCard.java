@@ -3,7 +3,6 @@ package code.cards;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -12,24 +11,18 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.util.function.Consumer;
 
-import static code.ModFile.makeImagePath;
-import static code.ModFile.modID;
+import static code.BoilerRoomMod.makeImagePath;
+import static code.BoilerRoomMod.modID;
 import static code.util.Wiz.*;
 
 public abstract class AbstractEasyCard extends CustomCard {
 
     protected final CardStrings cardStrings;
-
-    public int secondMagic;
-    public int baseSecondMagic;
-    public boolean upgradedSecondMagic;
-    public boolean isSecondMagicModified;
 
     public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
         this(cardID, cost, type, rarity, target, CardColor.COLORLESS);
@@ -66,28 +59,6 @@ public abstract class AbstractEasyCard extends CustomCard {
         return textureString;
     }
 
-
-    public void resetAttributes() {
-        super.resetAttributes();
-        secondMagic = baseSecondMagic;
-        isSecondMagicModified = false;
-    }
-
-    public void displayUpgrades() {
-        super.displayUpgrades();
-        if (upgradedSecondMagic) {
-            secondMagic = baseSecondMagic;
-            isSecondMagicModified = true;
-        }
-    }
-
-    protected void upgradeSecondMagic(int amount) {
-        baseSecondMagic += amount;
-        secondMagic = baseSecondMagic;
-        upgradedSecondMagic = true;
-    }
-
-
     protected void uDesc() {
         this.rawDescription = this.cardStrings.UPGRADE_DESCRIPTION;
         this.initializeDescription();
@@ -105,14 +76,6 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     public abstract void upp();
 
-    public AbstractCard makeStatEquivalentCopy() {
-        AbstractCard result = super.makeStatEquivalentCopy();
-        if (result instanceof AbstractEasyCard) {
-            AbstractEasyCard c = (AbstractEasyCard) result;
-            c.baseSecondMagic = c.secondMagic = baseSecondMagic;
-        }
-        return result;
-    }
 
     // These shortcuts are specifically for cards. All other shortcuts that aren't specifically for cards can go in Wiz.
     protected void dmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {

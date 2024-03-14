@@ -1,9 +1,16 @@
 package code.monsters;
 
 import basemod.abstracts.CustomMonster;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.RollMoveAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,16 +21,6 @@ public abstract class AbstractBoilerRoomMonster extends CustomMonster {
     private static final float ASCENSION_DAMAGE_BUFF_PERCENT = 1.10f;
     private static final float ASCENSION_TANK_BUFF_PERCENT = 1.10f;
     private static final float ASCENSION_SPECIAL_BUFF_PERCENT = 1.5f;
-
-    public AbstractBoilerRoomMonster(String name, String id, int maxHealth, float hb_x, float hb_y, float hb_w, float hb_h, String imgUrl, float offsetX, float offsetY) {
-        super(name, id, maxHealth, hb_x, hb_y, hb_w, hb_h, imgUrl, offsetX, offsetY);
-        setUpMisc();
-    }
-
-    public AbstractBoilerRoomMonster(String name, String id, int maxHealth, float hb_x, float hb_y, float hb_w, float hb_h, String imgUrl, float offsetX, float offsetY, boolean ignoreBlights) {
-        super(name, id, maxHealth, hb_x, hb_y, hb_w, hb_h, imgUrl, offsetX, offsetY, ignoreBlights);
-        setUpMisc();
-    }
 
     public AbstractBoilerRoomMonster(String name, String id, int maxHealth, float hb_x, float hb_y, float hb_w, float hb_h, String imgUrl) {
         super(name, id, maxHealth, hb_x, hb_y, hb_w, hb_h, imgUrl);
@@ -130,4 +127,38 @@ public abstract class AbstractBoilerRoomMonster extends CustomMonster {
         this.useShakeAnimation(5.0F);
         super.die(triggerRelics);
     }
+
+    private DamageInfo info;
+    private int multiplier;
+
+    @Override
+    public void takeTurn() {
+        info = new DamageInfo(this, this.moves.get(nextMove).baseDamage, DamageInfo.DamageType.NORMAL);
+        multiplier = this.moves.get(nextMove).multiplier;
+
+        if (info.base > -1) {
+            info.applyPowers(this, AbstractDungeon.player);
+        }
+
+        executeTurn();
+
+        addToBot(new RollMoveAction(this));
+    }
+
+    protected void hitPlayer(AbstractGameAction.AttackEffect effect) {
+        useFastAttackAnimation();
+        for (int i = 0; i < multiplier; i++) {
+            addToBot(new DamageAction(AbstractDungeon.player, info, effect));
+        }
+    }
+
+    protected AbstractPlayer player() {
+        return AbstractDungeon.player;
+    }
+
+    protected void applyToPlayer(AbstractPower p) {
+        addToBot(new ApplyPowerAction(player(), this, p, p.amount));
+    }
+
+    public abstract void executeTurn();
 }

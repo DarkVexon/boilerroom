@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.scenes.AbstractScene;
 
 import java.util.ArrayList;
 
-import static code.ModFile.makeID;
+import static code.BoilerRoomMod.makeID;
 
 public class BoilerRoom extends CustomDungeon {
     public static final String NAME = "BoilerRoom";
