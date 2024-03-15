@@ -1,6 +1,7 @@
 package code;
 
 import actlikeit.dungeons.CustomDungeon;
+import code.monsters.*;
 import code.scenes.BoilerRoomScene;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.MonsterInfo;
@@ -47,7 +48,9 @@ public class BoilerRoom extends CustomDungeon {
     @Override
     protected void generateWeakEnemies(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
-
+        monsters.add(new MonsterInfo(Craig.ID, 1.0F));
+        monsters.add(new MonsterInfo(makeID("FlagbearerTwoChompers"), 1.0F));
+        monsters.add(new MonsterInfo(makeID("TwoPotsAndWorm"), 1.0F));
         MonsterInfo.normalizeWeights(monsters);
         this.populateMonsterList(monsters, count, false);
     }
@@ -55,7 +58,13 @@ public class BoilerRoom extends CustomDungeon {
     @Override
     protected void generateStrongEnemies(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
-
+        monsters.add(new MonsterInfo(makeID("FiftyGnats"), 1.0F));
+        monsters.add(new MonsterInfo(makeID("IncenseClockPot"), 1.0F));
+        monsters.add(new MonsterInfo(makeID("GnatsSkittler"), 1.0F));
+        monsters.add(new MonsterInfo(makeID("FlagbearerSludgeWorm"), 1.0F));
+        monsters.add(new MonsterInfo(Marisa.ID, 1.0F));
+        monsters.add(new MonsterInfo(makeID("StinkyChompCraig"), 1.0F));
+        monsters.add(new MonsterInfo(makeID("IncenseSludgeStink"), 1.0F));
         MonsterInfo.normalizeWeights(monsters);
         this.populateFirstStrongEnemy(monsters, this.generateExclusions());
         this.populateMonsterList(monsters, count, false);
@@ -64,7 +73,9 @@ public class BoilerRoom extends CustomDungeon {
     @Override
     protected void generateElites(int count) {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
-
+        monsters.add(new MonsterInfo(GumGum.ID, 1.0F));
+        monsters.add(new MonsterInfo(Lagavulin2.ID, 1.0F));
+        monsters.add(new MonsterInfo(WormLegate.ID, 1.0F));
         MonsterInfo.normalizeWeights(monsters);
         this.populateMonsterList(monsters, count, true);
     }
