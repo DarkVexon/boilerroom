@@ -200,6 +200,18 @@ public class Wiz {
         });
     }
 
+    public static AbstractMonster getFrontmostEnemy() {
+        AbstractMonster foe = null;
+        float bestPos = 10000F;
+        for (AbstractMonster m : Wiz.getEnemies()) {
+            if (m.drawX < bestPos) {
+                foe = m;
+                bestPos = m.drawX;
+            }
+        }
+        return foe;
+    }
+
     public static void playAudio(ProAudio a) {
         CardCrawlGame.sound.play(makeID(a.name()));
     }

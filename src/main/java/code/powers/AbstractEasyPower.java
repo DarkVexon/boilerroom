@@ -4,10 +4,11 @@ import code.BoilerRoomMod;
 import code.util.TexLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnReceivePowerPower;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public abstract class AbstractEasyPower extends AbstractPower {
+public abstract class AbstractEasyPower extends AbstractPower implements OnReceivePowerPower {
     public AbstractEasyPower(String ID, String NAME, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
         this.ID = ID;
         this.isTurnBased = isTurnBased;
@@ -30,5 +31,10 @@ public abstract class AbstractEasyPower extends AbstractPower {
         }
 
         updateDescription();
+    }
+
+    @Override
+    public boolean onReceivePower(AbstractPower abstractPower, AbstractCreature abstractCreature, AbstractCreature abstractCreature1) {
+        return true;
     }
 }
