@@ -5,7 +5,9 @@ import basemod.BaseMod;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import code.cards.AbstractEasyCard;
-import code.monsters.Phantasm;
+import code.monsters.*;
+import code.monsters.special.GnatMonsterGroup;
+import code.monsters.special.GnatSkittlerGroup;
 import code.relics.AbstractEasyRelic;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
@@ -17,6 +19,8 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import java.nio.charset.StandardCharsets;
@@ -123,6 +127,58 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
     public void receivePostInitialize() {
         BoilerRoom boilerRoom = new BoilerRoom();
         boilerRoom.addAct(TheBeyond.ID);
-        boilerRoom.addBoss(Phantasm.ID, (BaseMod.GetMonster) Phantasm::new, "boilerResources/img/map/phantasm.png", "boilerResources/img/map/phantasmOutline.png");
+        boilerRoom.addBoss(Phantasm.ID, Phantasm::new, "boilerResources/img/map/phantasm.png", "boilerResources/img/map/phantasmOutline.png");
+        boilerRoom.addBoss(Globbleglibson.ID, Globbleglibson::new, "boilerResources/img/map/globbleglibson.png", "boilerResources/img/map/globbleglibsonOutline.png");
+        boilerRoom.addBoss(SlingBoy.ID, SlingBoy::new, "boilerResources/img/map/slingboy.png", "boilerResources/img/map/slingboyOutline.png");
+
+        BaseMod.addMonster(Craig.ID, () -> new MonsterGroup(new AbstractMonster[]{new Craig(100, 100)}));
+        BaseMod.addMonster("boiler:FlagbearerTwoChompers", "Flagbearer and Two Chompers", () -> new MonsterGroup(new AbstractMonster[]{
+                new CardChomper(-100, 0),
+                new CardChomper(0, 0),
+                new Flagbearer(125, 10)
+        }));
+        BaseMod.addMonster("boiler:TwoPotsAndWorm", "Two Pots + Worm", () -> new MonsterGroup(new AbstractMonster[]{
+                new PotThing(-100, 0),
+                new PotThing(0, 0),
+                new Worm(120, 10)
+        }));
+
+        BaseMod.addMonster("boiler:FiftyGnats", "Fifty Fucking Gnats", GnatMonsterGroup::new);
+        BaseMod.addMonster("boiler:IncenseClockPot", "Incence, Clock, Pot", () -> new MonsterGroup(new AbstractMonster[]{
+                new IncenseSkittler(-100, 0),
+                new Clockling(0, 0),
+                new PotThing(100, 0)
+        }));
+        BaseMod.addMonster("boiler:GnatsSkittler", "Gnats + Skittler", GnatSkittlerGroup::new);
+        BaseMod.addMonster("boiler:FlagbearerSludgeWorm", "Flagbearer Sludge Worm", () -> new MonsterGroup(new AbstractMonster[]{
+                new Flagbearer(-100, 0),
+                new SludgeMixer(0, 0),
+                new Worm(100, 0)
+        }));
+        BaseMod.addMonster(Marisa.ID, () -> new MonsterGroup(new AbstractMonster[]{
+                new Marisa(0, 0)
+        }));
+        BaseMod.addMonster("boiler:StinkyChompCraig", "Stinky Chomp Craig", () -> new MonsterGroup(new AbstractMonster[]{
+                new Stinky(-100, 0),
+                new CardChomper(0, 0),
+                new Craig(100, 0)
+        }));
+        BaseMod.addMonster("boiler:IncenseSludgeStink", "Incense Sludge Stink", () -> new MonsterGroup(new AbstractMonster[]{
+                new IncenseSkittler(-100, 0),
+                new SludgeMixer(0, 0),
+                new Stinky(100, 0)
+        }));
+
+        BaseMod.addMonster(GumGum.ID, () -> new MonsterGroup(new AbstractMonster[]{
+                new GumGum(0, 0)
+        }));
+
+        BaseMod.addMonster(Lagavulin2.ID, () -> new MonsterGroup(new AbstractMonster[]{
+                new Lagavulin2(0, 0)
+        }));
+
+        BaseMod.addMonster(WormLegate.ID, () -> new MonsterGroup(new AbstractMonster[]{
+                new WormLegate(0, 0)
+        }));
     }
 }

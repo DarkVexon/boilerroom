@@ -43,7 +43,6 @@ public class Stinky extends AbstractBoilerRoomMonster {
         switch (this.nextMove) {
             case STINK:
                 applyToPlayer(new WeakPower(player(), 1, true));
-                applyToPlayer(new VulnerablePower(player(), 1, true));
                 applyToPlayer(new FrailPower(player(), 1, true));
                 break;
         }

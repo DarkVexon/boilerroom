@@ -20,8 +20,8 @@ public class SlingBoy extends AbstractBoilerRoomMonster {
     private static final byte ATTACK = 0;
     private static final byte DEBUFF = 1;
 
-    public SlingBoy(float x, float y) {
-        super(NAME, ID, 1, x, y, 100, 100, "img/foe/" + NAME + ".png");
+    public SlingBoy() {
+        super(NAME, ID, 1, 100, 100, 100, 100, "img/foe/" + NAME + ".png");
         setHp(calcAscensionTankiness(200), calcAscensionTankiness(222));
 
         addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(7));
