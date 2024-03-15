@@ -3,17 +3,16 @@ package code;
 import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.helpers.RelicType;
-import basemod.interfaces.EditCardsSubscriber;
-import basemod.interfaces.EditKeywordsSubscriber;
-import basemod.interfaces.EditRelicsSubscriber;
-import basemod.interfaces.EditStringsSubscriber;
+import basemod.interfaces.*;
 import code.cards.AbstractEasyCard;
+import code.monsters.Phantasm;
 import code.relics.AbstractEasyRelic;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.TheBeyond;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
@@ -24,7 +23,7 @@ import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @SpireInitializer
-public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber {
+public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber, AddAudioSubscriber, PostInitializeSubscriber {
 
     public static final String modID = "boiler";
 
@@ -113,5 +112,17 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
                 BaseMod.addKeyword(modID, keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
             }
         }
+    }
+
+    @Override
+    public void receiveAddAudio() {
+
+    }
+
+    @Override
+    public void receivePostInitialize() {
+        BoilerRoom boilerRoom = new BoilerRoom();
+        boilerRoom.addAct(TheBeyond.ID);
+        boilerRoom.addBoss(Phantasm.ID, (BaseMod.GetMonster) Phantasm::new, "boilerResources/img/map/phantasm.png", "boilerResources/img/map/phantasmOutline.png");
     }
 }
