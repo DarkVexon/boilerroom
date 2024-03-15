@@ -97,12 +97,14 @@ public class PotThing extends AbstractBoilerRoomMonster {
         }
     }
 
-    private static void potCard(AbstractCard c) {
+    public static void potCard(AbstractCard c) {
         AbstractCard replacement = new PottedCard(c);
         if (AbstractDungeon.player.drawPile.contains(c)) {
             AbstractDungeon.player.drawPile.group.set(AbstractDungeon.player.drawPile.group.indexOf(c), replacement);
         } else if (AbstractDungeon.player.discardPile.contains(c)) {
             AbstractDungeon.player.discardPile.group.set(AbstractDungeon.player.discardPile.group.indexOf(c), replacement);
+        } else if (AbstractDungeon.player.hand.contains(c)) {
+            AbstractDungeon.player.hand.group.set(AbstractDungeon.player.hand.group.indexOf(c), replacement);
         }
     }
 

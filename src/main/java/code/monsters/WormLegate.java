@@ -24,7 +24,7 @@ public class WormLegate extends AbstractBoilerRoomMonster {
         setHp(calcAscensionTankiness(250), calcAscensionTankiness(261));
 
         addMove(SUMMON_WORMS, Intent.UNKNOWN);
-        addMove(SUMMON_WORM, Intent.ATTACK_BUFF);
+        addMove(SUMMON_WORM, Intent.ATTACK_BUFF, calcAscensionDamage(14));
     }
 
     @Override
