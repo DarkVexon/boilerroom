@@ -25,7 +25,7 @@ public class GumGum extends AbstractBoilerRoomMonster {
         setHp(calcAscensionTankiness(250), calcAscensionTankiness(261));
 
         addMove(DUMDUM, Intent.STRONG_DEBUFF);
-        addMove(CURIOUS, Intent.MAGIC);
+        addMove(CURIOUS, Intent.UNKNOWN);
         addMove(ATTACK_BLOCK, Intent.ATTACK_DEFEND, calcAscensionDamage(15));
     }
 

@@ -35,7 +35,7 @@ public class SludgeMixer extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
-        applyToSelf(new MalleablePower(this, calcAscensionSpecial(4)));
+        applyToSelf(new MalleablePower(this, calcAscensionSpecial(3)));
     }
 
     @Override
