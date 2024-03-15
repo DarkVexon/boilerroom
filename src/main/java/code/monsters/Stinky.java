@@ -17,7 +17,7 @@ public class Stinky extends AbstractBoilerRoomMonster {
 
     public Stinky(float x, float y) {
         super(NAME, ID, 1, x, y, 100, 100, "img/foe/" + NAME + ".png");
-        setHp(calcAscensionTankiness(19), calcAscensionTankiness(24));
+        setHp(calcAscensionTankiness(21), calcAscensionTankiness(26));
 
         addMove(STINK, Intent.DEBUFF);
     }

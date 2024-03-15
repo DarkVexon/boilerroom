@@ -27,7 +27,7 @@ public class Clockling extends AbstractBoilerRoomMonster {
 
     public Clockling(float x, float y) {
         super(NAME, ID, 1, x, y, 100, 100, "img/foe/" + NAME + ".png");
-        setHp(calcAscensionTankiness(72), calcAscensionTankiness(80));
+        setHp(calcAscensionTankiness(74), calcAscensionTankiness(82));
 
         addMove(TICK, Intent.BUFF);
         addMove(TOCK, Intent.DEBUFF);

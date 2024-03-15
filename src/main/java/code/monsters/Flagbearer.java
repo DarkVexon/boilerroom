@@ -21,7 +21,7 @@ public class Flagbearer extends AbstractBoilerRoomMonster {
 
     public Flagbearer(float x, float y) {
         super(NAME, ID, 1, x, y, 150F, 150F, "img/foe/flag.png");
-        setHp(calcAscensionTankiness(40), calcAscensionTankiness(50));
+        setHp(calcAscensionTankiness(46), calcAscensionTankiness(52));
 
         addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(10));
         addMove(RALLYING_CRY, Intent.BUFF);

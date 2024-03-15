@@ -24,7 +24,7 @@ public class PotThing extends AbstractBoilerRoomMonster {
 
     public PotThing(float x, float y) {
         super(NAME, ID, 1, x, y, 100, 100, "img/foe/" + NAME + ".png");
-        setHp(calcAscensionTankiness(58), calcAscensionTankiness(65));
+        setHp(calcAscensionTankiness(54), calcAscensionTankiness(61));
 
         addMove(POT_STUFF, Intent.DEBUFF);
         addMove(ATTACK_BUFF, Intent.ATTACK_BUFF, 12);

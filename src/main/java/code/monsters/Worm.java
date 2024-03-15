@@ -18,7 +18,7 @@ public class Worm extends AbstractBoilerRoomMonster {
 
     public Worm(float x, float y) {
         super(NAME, ID, 1, x, y, 50, 50, "img/foe/worm.png");
-        setHp(calcAscensionTankiness(39), calcAscensionTankiness(45));
+        setHp(calcAscensionTankiness(37), calcAscensionTankiness(41));
 
         addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(6), 2);
         addMove(ATTACK_DEBUFF, Intent.ATTACK_DEBUFF, calcAscensionDamage(8));
