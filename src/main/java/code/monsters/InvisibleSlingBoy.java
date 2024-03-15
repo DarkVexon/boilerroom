@@ -1,6 +1,8 @@
 package code.monsters;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.RollMoveAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.FrailPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
@@ -22,10 +24,38 @@ public class InvisibleSlingBoy extends AbstractBoilerRoomMonster {
     }
 
     @Override
+    public void usePreBattleAction() {
+        halfDead = true;
+    }
+
+    @Override
     protected void setUpMisc() {
         super.setUpMisc();
         this.type = EnemyType.NORMAL;
     }
+
+    @Override
+    public void takeTurn() {
+        halfDead = false;
+        info = new DamageInfo(this, this.moves.get(nextMove).baseDamage, DamageInfo.DamageType.NORMAL);
+        multiplier = this.moves.get(nextMove).multiplier;
+
+        if (info.base > -1) {
+            info.applyPowers(this, AbstractDungeon.player);
+        }
+
+        executeTurn();
+
+        addToBot(new RollMoveAction(this));
+        addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                InvisibleSlingBoy.this.halfDead = true;
+            }
+        });
+    }
+
 
     @Override
     public void executeTurn() {
@@ -41,6 +71,16 @@ public class InvisibleSlingBoy extends AbstractBoilerRoomMonster {
                 }
                 break;
         }
+    }
+
+    @Override
+    public void damage(DamageInfo info) {
+
+    }
+
+    @Override
+    public void die(boolean triggerRelics) {
+
     }
 
     @Override

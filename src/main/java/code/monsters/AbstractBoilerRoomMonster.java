@@ -131,8 +131,8 @@ public abstract class AbstractBoilerRoomMonster extends CustomMonster {
         super.die(triggerRelics);
     }
 
-    private DamageInfo info;
-    private int multiplier;
+    protected DamageInfo info;
+    protected int multiplier;
 
     @Override
     public void takeTurn() {
