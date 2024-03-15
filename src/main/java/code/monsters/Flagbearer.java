@@ -59,7 +59,7 @@ public class Flagbearer extends AbstractBoilerRoomMonster {
     @Override
     protected void getMove(int i) {
         if (lastMove(ATTACK)) {
-            setMoveShortcut(RALLYING_CRY, MOVES[RALLYING_CRY]);
+            setMoveShortcut(RALLYING_CRY, "Rally");
         } else {
             setMoveShortcut(ATTACK);
         }

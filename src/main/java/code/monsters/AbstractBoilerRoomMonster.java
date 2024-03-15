@@ -1,6 +1,7 @@
 package code.monsters;
 
 import basemod.abstracts.CustomMonster;
+import code.util.Wiz;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -9,6 +10,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
@@ -18,6 +20,7 @@ import java.util.Map;
 public abstract class AbstractBoilerRoomMonster extends CustomMonster {
     protected Map<Byte, EnemyMoveInfo> moves;
     protected boolean firstMove = true;
+    protected int turns = 1;
     private static final float ASCENSION_DAMAGE_BUFF_PERCENT = 1.10f;
     private static final float ASCENSION_TANK_BUFF_PERCENT = 1.10f;
     private static final float ASCENSION_SPECIAL_BUFF_PERCENT = 1.5f;
@@ -152,12 +155,24 @@ public abstract class AbstractBoilerRoomMonster extends CustomMonster {
         }
     }
 
+    protected static AbstractMonster randomAlly() {
+        return Wiz.getRandomItem(Wiz.getEnemies());
+    }
+
     protected AbstractPlayer player() {
         return AbstractDungeon.player;
     }
 
     protected void applyToPlayer(AbstractPower p) {
         addToBot(new ApplyPowerAction(player(), this, p, p.amount));
+    }
+
+    protected void applyToSelf(AbstractPower p) {
+        addToBot(new ApplyPowerAction(this, this, p, p.amount));
+    }
+
+    protected void applyToAlly(AbstractMonster m, AbstractPower p) {
+        addToBot(new ApplyPowerAction(m, this, p, p.amount));
     }
 
     public abstract void executeTurn();

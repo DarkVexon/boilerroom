@@ -159,30 +159,6 @@ public class Wiz {
         topDeck(c, 1);
     }
 
-    public static void applyToEnemy(AbstractMonster m, AbstractPower po) {
-        atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
-    }
-
-    public static void applyToEnemyTop(AbstractMonster m, AbstractPower po) {
-        att(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
-    }
-
-    public static void applyToSelf(AbstractPower po) {
-        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
-    }
-
-    public static void applyToSelfTop(AbstractPower po) {
-        att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
-    }
-
-    public static void thornDmg(AbstractCreature m, int amount, AbstractGameAction.AttackEffect AtkFX) {
-        atb(new DamageAction(m, new DamageInfo(AbstractDungeon.player, amount, DamageInfo.DamageType.THORNS), AtkFX));
-    }
-
-    public static void thornDmg(AbstractCreature m, int amount) {
-        thornDmg(m, amount, AbstractGameAction.AttackEffect.NONE);
-    }
-
     public static void discard(int amount, boolean isRandom) {
         atb(new DiscardAction(adp(), adp(), amount, isRandom));
     }

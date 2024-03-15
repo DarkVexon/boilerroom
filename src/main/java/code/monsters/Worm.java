@@ -50,8 +50,16 @@ public class Worm extends AbstractBoilerRoomMonster {
 
     @Override
     protected void getMove(int i) {
-        if (lastMove(ATTACK)) {
-            setMoveShortcut(ATTACK_DEBUFF, MOVES[ATTACK_DEBUFF]);
+        if (turns == 3) {
+            setMoveShortcut(BURROW, "Burrow");
+        } else {
+            if (lastMove(ATTACK)) {
+                setMoveShortcut(ATTACK_DEBUFF);
+            } else if (lastMove(ATTACK_DEBUFF)) {
+                setMoveShortcut(ATTACK);
+            }
         }
+
+        turns += 1;
     }
 }
