@@ -114,7 +114,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
 
                     @Override
                     public void updateDescription() {
-                        description = "Whenever you play a card with a reduced cost or for no cost, reset the cost of cards in your hand, then increase them by 2 for the rest of combat.";
+                        description = "Whenever you play a card for a reduced cost, reset the cost of cards in your hand, then increase them by 2 for the rest of combat.";
                     }
                 });
                 break;
