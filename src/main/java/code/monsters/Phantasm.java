@@ -3,6 +3,7 @@ package code.monsters;
 import basemod.BaseMod;
 import code.powers.LambdaPower;
 import code.util.Wiz;
+import code.vfx.StealRelicEffect;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.ClearCardQueueAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
@@ -16,7 +17,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.*;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.sun.org.apache.bcel.internal.generic.RET;
 
 import static code.BoilerRoomMod.makeID;
 
@@ -49,7 +49,6 @@ public class Phantasm extends AbstractBoilerRoomMonster {
     @Override
     public void usePreBattleAction() {
         AbstractDungeon.getCurrRoom().cannotLose = true;
-        applyToSelf(new IntangiblePower(this, 1));
         addToBot(new TalkAction(this, "Nice hand... SAY GOODBYE TO IT!!", 0.5F, 2.0F));
         addToBot(new ExhaustAction(BaseMod.MAX_HAND_SIZE, true, true));
     }
@@ -112,21 +111,25 @@ public class Phantasm extends AbstractBoilerRoomMonster {
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
+                        applyToSelf(new ArtifactPower(this, 10));
                         revives -= 1;
                     case 3:
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
+                        applyToSelf(new MalleablePower(this, 10));
                         revives -= 1;
                     case 2:
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
+                        applyToSelf(new BufferPower(this, 5));
                         revives -= 1;
                     case 1:
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
+                        applyToSelf(new IntangiblePower(this, 5));
                         revives -= 1;
                         addToBot(new CanLoseAction());
                 }
@@ -162,6 +165,11 @@ public class Phantasm extends AbstractBoilerRoomMonster {
                     break;
                 case 1:
                     addToBot(new TalkAction(this, "Please... just a few more turns... I'll win...", 0.5F, 2F));
+                    addToBot(new TalkAction(this, "How will you fare... with no Relics...?", 0.5F, 2F));
+                    for (AbstractRelic r : AbstractDungeon.player.relics) {
+                        AbstractDungeon.player.loseRelic(r.relicId);
+                        AbstractDungeon.effectList.add(new StealRelicEffect(r, this));
+                    }
                     break;
             }
             addToBot(new SetMoveAction(this, RETURN, Intent.UNKNOWN));
