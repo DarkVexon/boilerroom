@@ -5,6 +5,7 @@ import basemod.BaseMod;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import code.cards.AbstractEasyCard;
+import code.events.*;
 import code.monsters.*;
 import code.monsters.special.GnatMonsterGroup;
 import code.monsters.special.GnatSkittlerGroup;
@@ -180,5 +181,12 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
         BaseMod.addMonster(WormLegate.ID, () -> new MonsterGroup(new AbstractMonster[]{
                 new WormLegate(0, 0)
         }));
+
+        BaseMod.addEvent("boiler:FellInBoiler1", BoilerEventCurses.class, BoilerRoom.ID);
+        BaseMod.addEvent("boiler:FellInBoiler2", BoilerEventGood.class, BoilerRoom.ID);
+        BaseMod.addEvent("boiler:FellInBoiler3", BoilerEventMarkOfBloom.class, BoilerRoom.ID);
+        BaseMod.addEvent("boiler:FellInBoiler4", BoilerEventMaxHandSize.class, BoilerRoom.ID);
+        BaseMod.addEvent("boiler:FellInBoiler5", BoilerEventPots.class, BoilerRoom.ID);
+        BaseMod.addEvent("boiler:FellInBoiler6", BoilerEventSpecters.class, BoilerRoom.ID);
     }
 }

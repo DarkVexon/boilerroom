@@ -105,6 +105,9 @@ public class PotThing extends AbstractBoilerRoomMonster {
             AbstractDungeon.player.discardPile.group.set(AbstractDungeon.player.discardPile.group.indexOf(c), replacement);
         } else if (AbstractDungeon.player.hand.contains(c)) {
             AbstractDungeon.player.hand.group.set(AbstractDungeon.player.hand.group.indexOf(c), replacement);
+        } else if (AbstractDungeon.player.masterDeck.contains(c)) {
+            AbstractDungeon.player.masterDeck.removeCard(c);
+            AbstractDungeon.player.masterDeck.addToRandomSpot(replacement);
         }
     }
 

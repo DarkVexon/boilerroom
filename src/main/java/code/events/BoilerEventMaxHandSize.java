@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
 public class BoilerEventMaxHandSize extends AbstractBoilerRoomEvent {
     public BoilerEventMaxHandSize() {
-        super("A");
+        super("4");
     }
 
     @Override

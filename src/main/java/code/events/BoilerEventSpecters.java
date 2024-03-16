@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class BoilerEventSpecters extends AbstractBoilerRoomEvent{
     public BoilerEventSpecters() {
-        super("B");
+        super("6");
     }
 
     @Override

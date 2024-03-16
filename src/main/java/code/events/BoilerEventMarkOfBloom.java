@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.relics.MarkOfTheBloom;
 
 public class BoilerEventMarkOfBloom extends AbstractBoilerRoomEvent{
     public BoilerEventMarkOfBloom() {
-        super("A");
+        super("3");
     }
 
     @Override
