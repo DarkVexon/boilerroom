@@ -92,7 +92,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
                     hitPlayer(AbstractGameAction.AttackEffect.BLUNT_HEAVY);
                 } else {
                     addToBot(new TalkAction(this, "I think... you should... have rested.", 0.5F, 1.5F));
-                    applyToPlayer(new WeakPower(player(), calcAscensionSpecial(5), true));
+                    applyToSelf(new AngerPower(this, 2));
                 }
                 break;
             case LAMEIFY:

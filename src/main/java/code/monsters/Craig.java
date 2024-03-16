@@ -28,7 +28,7 @@ public class Craig extends AbstractBoilerRoomMonster {
 
     public Craig(float x, float y) {
         super("The Craig", ID, 1, x, y, 200, 225);
-        setHp(calcAscensionTankiness(115), calcAscensionTankiness(125));
+        setHp(calcAscensionTankiness(117), calcAscensionTankiness(126));
 
         addMove(SMACK, Intent.ATTACK_DEBUFF, calcAscensionDamage(14));
         addMove(NOMNOMNOM, Intent.STRONG_DEBUFF);

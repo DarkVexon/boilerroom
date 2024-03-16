@@ -1,13 +1,16 @@
 package code.monsters;
 
+import code.cards.SpecterCard;
 import code.powers.LambdaPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
 import static code.BoilerRoomMod.makeID;
 
@@ -24,7 +27,7 @@ public class Marisa extends AbstractBoilerRoomMonster {
         super("Marisa from Touhou", ID, 1, x, y, 333, 325);
         setHp(calcAscensionTankiness(192), calcAscensionTankiness(201));
 
-        addMove(ATTACK, Intent.ATTACK, 8);
+        addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(4));
     }
 
     @Override
@@ -53,8 +56,14 @@ public class Marisa extends AbstractBoilerRoomMonster {
             }
 
             @Override
+            public void onDeath() {
+                flash();
+                AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new SpecterCard(), Settings.WIDTH / 2F, Settings.HEIGHT / 2F));
+            }
+
+            @Override
             public void updateDescription() {
-                description = "I'm Marisa from Touhou. Also, I can't be debuffed, and I take 1 less damage from all sources, and you can't use potions. Hee hee!";
+                description = "I'm Marisa from Touhou. Also, I can't be debuffed, and I take 1 less damage from all sources, and you can't use potions, and if you beat me you get cursed. Hee hee!";
             }
         });
     }
