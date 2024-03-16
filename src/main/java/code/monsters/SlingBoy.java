@@ -1,5 +1,6 @@
 package code.monsters;
 
+import code.cards.PottedCard;
 import code.util.Wiz;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -33,7 +34,8 @@ public class SlingBoy extends AbstractBoilerRoomMonster {
         applyToSelf(new ArtifactPower(this, 150));
         applyToSelf(new MetallicizePower(this, calcAscensionSpecial(25)));
         for (AbstractCard c : Wiz.getAllCardsInCardGroups(true, false)) {
-            potCard(c);
+            if (!(c instanceof PottedCard))
+                potCard(c);
         }
     }
 

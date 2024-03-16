@@ -42,7 +42,7 @@ public class BoilerEventSpecters extends AbstractBoilerRoomEvent{
 
     @Override
     protected void doB() {
-        AbstractDungeon.player.damage(new DamageInfo(null, AbstractDungeon.player.getAscensionMaxHPLoss() * 3));
+        AbstractDungeon.player.damage(new DamageInfo(null, AbstractDungeon.player.getAscensionMaxHPLoss() * 4));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class BoilerEventSpecters extends AbstractBoilerRoomEvent{
 
     @Override
     protected String getBText() {
-        return "Lose " + AbstractDungeon.player.getAscensionMaxHPLoss() * 3 + " HP.";
+        return "Lose " + AbstractDungeon.player.getAscensionMaxHPLoss() * 4 + " HP.";
     }
 
     @Override

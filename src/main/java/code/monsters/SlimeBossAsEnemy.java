@@ -57,7 +57,7 @@ public class SlimeBossAsEnemy extends AbstractMonster {
     private boolean firstTurn = true;
 
     public SlimeBossAsEnemy(float x, float y) {
-        super(NAME, "SlimeBoss", 140, x, y , 400.0F, 350.0F, (String) null, 0.0F, 28.0F);
+        super(NAME, "SlimeBoss", 140, 0, 28, 400.0F, 350.0F, (String) null, x, y);
         this.type = EnemyType.NORMAL;
         this.dialogX = -150.0F * Settings.scale;
         this.dialogY = -70.0F * Settings.scale;

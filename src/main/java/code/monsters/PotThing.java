@@ -27,7 +27,7 @@ public class PotThing extends AbstractBoilerRoomMonster {
         setHp(calcAscensionTankiness(54), calcAscensionTankiness(61));
 
         addMove(POT_STUFF, Intent.DEBUFF);
-        addMove(ATTACK_BUFF, Intent.ATTACK_BUFF, 12);
+        addMove(ATTACK_BUFF, Intent.ATTACK_BUFF, calcAscensionDamage(12));
     }
 
     @Override
@@ -68,12 +68,12 @@ public class PotThing extends AbstractBoilerRoomMonster {
                         ArrayList<AbstractCard> toAdd = new ArrayList<>();
                         ArrayList<AbstractCard> valids = new ArrayList<>();
                         for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
-                            if (c.cost >= 0 && c.cost <= 3) {
+                            if (c.cost >= 0 && c.cost <= 3 && !(c instanceof PottedCard)) {
                                 valids.add(c);
                             }
                         }
                         for (AbstractCard c : AbstractDungeon.player.discardPile.group) {
-                            if (c.cost >= 0 && c.cost <= 3) {
+                            if (c.cost >= 0 && c.cost <= 3 && !(c instanceof PottedCard)) {
                                 valids.add(c);
                             }
                         }

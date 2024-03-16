@@ -30,7 +30,7 @@ public class SludgeMixer extends AbstractBoilerRoomMonster {
 
         addMove(SLUDGE, Intent.STRONG_DEBUFF);
         addMove(ASSIST, Intent.BUFF);
-        addMove(SLIMESMACK, Intent.ATTACK_DEBUFF);
+        addMove(SLIMESMACK, Intent.ATTACK_DEBUFF, calcAscensionDamage(14));
     }
 
     @Override

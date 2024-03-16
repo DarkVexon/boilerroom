@@ -3,8 +3,6 @@ package code.monsters;
 import code.powers.LambdaPower;
 import code.util.Wiz;
 import com.badlogic.gdx.Gdx;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -39,7 +37,7 @@ public class Clockling extends AbstractBoilerRoomMonster {
 
             @Override
             protected void onCreated() {
-                val = 180;
+                val = 3;
             }
 
             @Override
@@ -48,8 +46,8 @@ public class Clockling extends AbstractBoilerRoomMonster {
                 if (!owner.isDead && !AbstractDungeon.isScreenUp && !(owner.currentHealth <= 0) && !owner.isDying && !owner.isDeadOrEscaped()) {
                     val -= Gdx.graphics.getDeltaTime();
                     if (val <= 0) {
-                        val = 180;
-                        addToTop(new DamageAction(player(), new DamageInfo(owner, amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+                        val = 3;
+                        AbstractDungeon.player.damage(new DamageInfo(owner, amount, DamageInfo.DamageType.THORNS));
                     }
                 }
             }

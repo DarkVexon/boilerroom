@@ -29,8 +29,8 @@ public class Lagavulin2 extends AbstractBoilerRoomMonster {
     }
 
     private void talk(String text) {
-        TalkAction action = new TalkAction(this, text, 1.5F, 1.5F);
-        ReflectionHacks.setPrivateInherited(action, AbstractGameAction.class, "duration", 1.5F);
+        TalkAction action = new TalkAction(this, text, 1.75F, 1.75F);
+        ReflectionHacks.setPrivateInherited(action, AbstractGameAction.class, "duration", 1.75F);
         addToBot(action);
     }
 

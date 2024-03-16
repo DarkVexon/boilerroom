@@ -18,7 +18,7 @@ public class BoilerRoom extends CustomDungeon {
     public static final String ID = makeID(NAME);
 
     public BoilerRoom() {
-        super(NAME, ID, "images/ui/panel.png", true, 2, 12, 10);
+        super("Boiler Room", ID, "boilerResources/images/ui/panel.png", true, 2, 12, 10);
     }
 
     public BoilerRoom(CustomDungeon cd, AbstractPlayer p, ArrayList<String> emptyList) {

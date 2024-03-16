@@ -26,12 +26,13 @@ public abstract class AbstractBoilerRoomMonster extends CustomMonster {
     private static final float ASCENSION_SPECIAL_BUFF_PERCENT = 1.5f;
 
     public AbstractBoilerRoomMonster(String name, String id, int maxHealth, float hb_x, float hb_y, float hb_w, float hb_h) {
-        super(name, id, maxHealth, hb_x, hb_y, hb_w, hb_h, "boilerResources/images/foe/" + name + ".png");
+        super(name, id, maxHealth, 0, 0, hb_w, hb_h, "boilerResources/images/foe/" + name + ".png", hb_x, hb_y);
         setUpMisc();
     }
 
     protected void setUpMisc() {
         moves = new HashMap<>();
+
         this.dialogX = (this.hb_x - 70.0F) * Settings.scale;
         this.dialogY -= (this.hb_y - 55.0F) * Settings.scale;
     }
@@ -150,7 +151,7 @@ public abstract class AbstractBoilerRoomMonster extends CustomMonster {
 
     protected void hitPlayer(AbstractGameAction.AttackEffect effect) {
         useFastAttackAnimation();
-        for (int i = 0; i < multiplier; i++) {
+        for (int i = 0; i < Math.max(multiplier, 1); i++) {
             addToBot(new DamageAction(AbstractDungeon.player, info, effect));
         }
     }

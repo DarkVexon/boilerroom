@@ -55,7 +55,7 @@ public class Worm extends AbstractBoilerRoomMonster {
         } else {
             if (lastMove(ATTACK)) {
                 setMoveShortcut(ATTACK_DEBUFF);
-            } else if (lastMove(ATTACK_DEBUFF)) {
+            } else {
                 setMoveShortcut(ATTACK);
             }
         }

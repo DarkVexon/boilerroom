@@ -29,6 +29,8 @@ public class Flagbearer extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
+        this.setMoveShortcut(ATTACK, "First Strike!");
+        this.createIntent();
         addToBot(new TalkAction(this, "I get to go first."));
         addToBot(new ShowMoveNameAction(this, "First Strike!"));
         addToBot(new IntentFlashAction(this));

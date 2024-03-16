@@ -1,5 +1,6 @@
 package code.events;
 
+import code.cards.PottedCard;
 import code.relics.DisablePowers;
 import code.util.Wiz;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -39,7 +40,7 @@ public class BoilerEventPots extends AbstractBoilerRoomEvent {
         ArrayList<AbstractCard> toAdd = new ArrayList<>();
         ArrayList<AbstractCard> valids = new ArrayList<>();
         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-            if (c.cost >= 0 && c.cost <= 3) {
+            if (c.cost >= 0 && c.cost <= 3 && !(c instanceof PottedCard)) {
                 valids.add(c);
             }
         }

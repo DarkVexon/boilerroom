@@ -132,21 +132,21 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
 
         BaseMod.addMonster(Craig.ID, () -> new MonsterGroup(new AbstractMonster[]{new Craig(100, 100)}));
         BaseMod.addMonster("boiler:FlagbearerTwoChompers", "Flagbearer and Two Chompers", () -> new MonsterGroup(new AbstractMonster[]{
-                new CardChomper(-100, 0),
-                new CardChomper(0, 0),
+                new CardChomper(-300, 0),
+                new CardChomper(-120, 0),
                 new Flagbearer(125, 10)
         }));
         BaseMod.addMonster("boiler:TwoPotsAndWorm", "Two Pots + Worm", () -> new MonsterGroup(new AbstractMonster[]{
-                new PotThing(-100, 0),
+                new PotThing(-200, 0),
                 new PotThing(0, 0),
-                new Worm(120, 10)
+                new Worm(175, 10)
         }));
 
         BaseMod.addMonster("boiler:FiftyGnats", "Fifty Fucking Gnats", GnatMonsterGroup::new);
         BaseMod.addMonster("boiler:IncenseClockPot", "Incence, Clock, Pot", () -> new MonsterGroup(new AbstractMonster[]{
-                new IncenseSkittler(-100, 0),
-                new Clockling(0, 0),
-                new PotThing(100, 0)
+                new IncenseSkittler(-525, 0),
+                new Clockling(-140, 10),
+                new PotThing(150, 0)
         }));
         BaseMod.addMonster("boiler:GnatsSkittler", "Gnats + Skittler", GnatSkittlerGroup::new);
         BaseMod.addMonster("boiler:FlagbearerSludgeWorm", "Flagbearer Sludge Worm", () -> new MonsterGroup(new AbstractMonster[]{
@@ -163,9 +163,9 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
                 new Craig(100, 0)
         }));
         BaseMod.addMonster("boiler:IncenseSludgeStink", "Incense Sludge Stink", () -> new MonsterGroup(new AbstractMonster[]{
-                new IncenseSkittler(-100, 0),
-                new SludgeMixer(0, 0),
-                new Stinky(100, 0)
+                new IncenseSkittler(-400, 0),
+                new SludgeMixer(-190, 30),
+                new Stinky(100, 150)
         }));
 
         BaseMod.addMonster(GumGum.ID, () -> new MonsterGroup(new AbstractMonster[]{

@@ -48,9 +48,14 @@ public class CardChomper extends AbstractBoilerRoomMonster {
                 applyToPlayer(new LambdaPower("Hungry", AbstractPower.PowerType.DEBUFF, false, player(), 1) {
                     @Override
                     public void onCardDraw(AbstractCard card) {
-                        flash();
-                        addToTop(new RemoveSpecificPowerAction(owner, owner, this));
-                        addToTop(new ExhaustSpecificCardAction(card, AbstractDungeon.player.hand));
+                        if (amount > 0) {
+                            flash();
+                            amount -= 1;
+                            if (amount <= 0) {
+                                addToTop(new RemoveSpecificPowerAction(owner, owner, this));
+                            }
+                            addToTop(new ExhaustSpecificCardAction(card, AbstractDungeon.player.hand));
+                        }
                     }
 
                     @Override
