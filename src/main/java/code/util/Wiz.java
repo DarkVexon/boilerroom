@@ -22,6 +22,7 @@ import code.actions.TimedVFXAction;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -91,11 +92,11 @@ public class Wiz {
         return returnTrulyRandomPrediCardInCombat(pred, false);
     }
 
-    public static <T> T getRandomItem(ArrayList<T> list, Random rng) {
+    public static <T> T getRandomItem(List<T> list, Random rng) {
         return list.isEmpty() ? null : list.get(rng.random(list.size() - 1));
     }
 
-    public static <T> T getRandomItem(ArrayList<T> list) {
+    public static <T> T getRandomItem(List<T> list) {
         return getRandomItem(list, AbstractDungeon.cardRandomRng);
     }
 
