@@ -27,7 +27,7 @@ public class Craig extends AbstractBoilerRoomMonster {
     private static final byte BLOCK_BONK = 2;
 
     public Craig(float x, float y) {
-        super(NAME, ID, 1, x, y, 100, 100, "img/foe/" + NAME + ".png");
+        super(NAME, ID, 1, x, y, 100, 100);
         setHp(calcAscensionTankiness(115), calcAscensionTankiness(125));
 
         addMove(SMACK, Intent.ATTACK_DEBUFF, calcAscensionDamage(14));

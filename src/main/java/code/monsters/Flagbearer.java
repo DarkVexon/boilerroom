@@ -20,7 +20,7 @@ public class Flagbearer extends AbstractBoilerRoomMonster {
     private static final byte RALLYING_CRY = 1;
 
     public Flagbearer(float x, float y) {
-        super(NAME, ID, 1, x, y, 150F, 150F, "img/foe/flag.png");
+        super(NAME, ID, 1, x, y, 150F, 150F);
         setHp(calcAscensionTankiness(46), calcAscensionTankiness(52));
 
         addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(10));

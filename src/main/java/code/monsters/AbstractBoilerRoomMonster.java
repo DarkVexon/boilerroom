@@ -25,8 +25,8 @@ public abstract class AbstractBoilerRoomMonster extends CustomMonster {
     private static final float ASCENSION_TANK_BUFF_PERCENT = 1.10f;
     private static final float ASCENSION_SPECIAL_BUFF_PERCENT = 1.5f;
 
-    public AbstractBoilerRoomMonster(String name, String id, int maxHealth, float hb_x, float hb_y, float hb_w, float hb_h, String imgUrl) {
-        super(name, id, maxHealth, hb_x, hb_y, hb_w, hb_h, imgUrl);
+    public AbstractBoilerRoomMonster(String name, String id, int maxHealth, float hb_x, float hb_y, float hb_w, float hb_h) {
+        super(name, id, maxHealth, hb_x, hb_y, hb_w, hb_h, "boilerResources/img/foe/" + name + ".png");
         setUpMisc();
     }
 

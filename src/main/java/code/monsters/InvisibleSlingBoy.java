@@ -18,7 +18,7 @@ public class InvisibleSlingBoy extends AbstractBoilerRoomMonster {
     private static final byte DEBUFF = 1;
 
     public InvisibleSlingBoy(float x, float y) {
-        super(NAME, ID, 1, x, y, 1, 1, "img/foe/" + NAME + ".png");
+        super(NAME, ID, 1, x, y, 1, 1);
         addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(7));
         addMove(DEBUFF, Intent.DEBUFF);
     }

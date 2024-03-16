@@ -25,7 +25,7 @@ public class SludgeMixer extends AbstractBoilerRoomMonster {
     private static final byte SLIMESMACK = 2;
 
     public SludgeMixer(float x, float y) {
-        super(NAME, ID, 1, x, y, 100, 100, "img/foe/" + NAME + ".png");
+        super(NAME, ID, 1, x, y, 100, 100);
         setHp(calcAscensionTankiness(65), calcAscensionTankiness(73));
 
         addMove(SLUDGE, Intent.STRONG_DEBUFF);

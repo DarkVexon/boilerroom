@@ -20,7 +20,7 @@ public class WormLegate extends AbstractBoilerRoomMonster {
     private AbstractMonster[] worms;
 
     public WormLegate(float x, float y) {
-        super(NAME, ID, 1, x, y, 100, 100, "img/foe/" + NAME + ".png");
+        super(NAME, ID, 1, x, y, 100, 100);
         setHp(calcAscensionTankiness(250), calcAscensionTankiness(261));
 
         addMove(SUMMON_WORMS, Intent.UNKNOWN);

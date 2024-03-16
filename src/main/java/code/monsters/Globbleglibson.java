@@ -25,7 +25,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
     private static final byte DEBUFFS = 4;
 
     public Globbleglibson() {
-        super(NAME, ID, 1, 100, 100, 100, 100, "img/foe/" + NAME + ".png");
+        super(NAME, ID, 1, 100, 100, 100, 100);
         setHp(calcAscensionTankiness(300), calcAscensionTankiness(320));
 
         addMove(TOTHIRTY, Intent.ATTACK, -1);
