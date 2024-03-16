@@ -31,7 +31,7 @@ public class GumGum extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
-        applyToSelf(new CuriosityPower(this, calcAscensionSpecial(6)));
+        applyToSelf(new CuriosityPower(this, calcAscensionSpecial(4)));
     }
 
     @Override

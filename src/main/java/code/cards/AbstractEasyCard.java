@@ -45,6 +45,7 @@ public abstract class AbstractEasyCard extends CustomCard {
             case ATTACK:
             case POWER:
             case SKILL:
+            case CURSE:
                 textureString = makeImagePath("cards/" + cardName + ".png");
                 break;
             default:
