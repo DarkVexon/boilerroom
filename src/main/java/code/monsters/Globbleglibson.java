@@ -5,13 +5,12 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.actions.common.SpawnMonsterAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
-import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import static code.BoilerRoomMod.makeID;
 
@@ -28,7 +27,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
 
     public Globbleglibson() {
         super("Motherthing", ID, 1, 150, -1, 333, 444);
-        setHp(calcAscensionTankiness(300), calcAscensionTankiness(320));
+        setHp(calcAscensionTankiness(301), calcAscensionTankiness(320));
 
         addMove(TOTHIRTY, Intent.ATTACK, -1);
         addMove(LAMEIFY, Intent.DEBUFF);
@@ -74,13 +73,6 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
                 description = "You can't gain buffs or debuff others.";
             }
         });
-        if (AbstractDungeon.player.id.toLowerCase().contains("thorton")) {
-            if (AbstractDungeon.ascensionLevel <= 19) {
-                addToBot(new TalkAction(this, "Greed... is bad... Thorton.", 0.5F, 1.5F));
-            } else {
-                addToBot(new TalkAction(this, "In time, you will understand.", 0.5F, 1.5F));
-            }
-        }
     }
 
     @Override
@@ -103,12 +95,12 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
             case LAMEIFY:
                 applyToPlayer(new LambdaPower("Lame", AbstractPower.PowerType.DEBUFF, false, player(), -1) {
                     @Override
-                    public void onUseCard(AbstractCard card, UseCardAction action) {
-                        if (card.costForTurn < card.cost || card.freeToPlay()) {
+                    public void onPlayCard(AbstractCard card, AbstractMonster m) {
+                        if (((card.cost < card.makeCopy().cost || card.costForTurn < card.makeCopy().costForTurn) && card.isCostModified) || card.freeToPlay()) {
                             flash();
                             for (AbstractCard c : AbstractDungeon.player.hand.group) {
                                 c.freeToPlayOnce = false;
-                                c.updateCost(2);
+                                c.updateCost(1);
                             }
                         }
                     }
@@ -120,12 +112,12 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
 
                     @Override
                     public void updateDescription() {
-                        description = "Whenever you play a card for a reduced cost, reset the cost of cards in your hand, then increase them by 2 for the rest of combat.";
+                        description = "Whenever you play a card for a reduced cost, increase the cost of cards in your hand by 1.";
                     }
                 });
                 break;
             case SUMMONSLIMEBOSS:
-                addToBot(new SpawnMonsterAction(new SlimeBossAsEnemy(this.hb_x - 150, this.hb_y), false));
+                addToBot(new SpawnMonsterAction(new SlimeBossAsEnemy(this.hb_x - 320, this.hb_y), false));
                 break;
             case SQUASH:
                 applyToPlayer(new ConstrictedPower(player(), this, calcAscensionSpecial(6)));

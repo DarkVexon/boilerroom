@@ -1,9 +1,7 @@
 package code.events;
 
-import code.cards.PottedCard;
 import code.relics.DisablePowers;
-import code.util.Wiz;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import code.relics.Pot;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapRoomNode;
@@ -11,8 +9,6 @@ import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import com.megacrit.cardcrawl.rooms.ShopRoom;
 
 import java.util.ArrayList;
-
-import static code.monsters.PotThing.potCard;
 
 public class BoilerEventPots extends AbstractBoilerRoomEvent {
     public BoilerEventPots() {
@@ -36,25 +32,7 @@ public class BoilerEventPots extends AbstractBoilerRoomEvent {
 
     @Override
     protected void doA() {
-        int numPotted = 8;
-        ArrayList<AbstractCard> toAdd = new ArrayList<>();
-        ArrayList<AbstractCard> valids = new ArrayList<>();
-        for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-            if (c.cost >= 0 && c.cost <= 3 && !(c instanceof PottedCard)) {
-                valids.add(c);
-            }
-        }
-        for (int i = 0; i < numPotted; i++) {
-            if (valids.isEmpty()) {
-                break;
-            }
-            AbstractCard c = Wiz.getRandomItem(valids);
-            valids.remove(c);
-            toAdd.add(c);
-        }
-        for (AbstractCard c : toAdd) {
-            potCard(c);
-        }
+        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2, Settings.HEIGHT / 2, new Pot());
     }
 
     @Override
@@ -75,7 +53,7 @@ public class BoilerEventPots extends AbstractBoilerRoomEvent {
 
     @Override
     protected String getAText() {
-        return "Put 8 random cards in your deck in Pots.";
+        return "At the start of each combat, Pot 7 random cards.";
     }
 
     @Override

@@ -28,7 +28,7 @@ public class Craig extends AbstractBoilerRoomMonster {
 
     public Craig(float x, float y) {
         super("The Craig", ID, 1, x, y, 200, 225);
-        setHp(calcAscensionTankiness(117), calcAscensionTankiness(126));
+        setHp(calcAscensionTankiness(135), calcAscensionTankiness(151));
 
         addMove(SMACK, Intent.ATTACK_DEBUFF, calcAscensionDamage(14));
         addMove(NOMNOMNOM, Intent.STRONG_DEBUFF);
@@ -37,7 +37,7 @@ public class Craig extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
-        applyToSelf(new RegenerateMonsterPower(this, calcAscensionSpecial(12)));
+        applyToSelf(new RegenerateMonsterPower(this, calcAscensionSpecial(14)));
     }
 
     @Override
