@@ -26,7 +26,7 @@ import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @SpireInitializer
-public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber, AddAudioSubscriber, PostInitializeSubscriber {
+public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber {
 
     public static final String modID = "boiler";
 
@@ -113,11 +113,6 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
                 BaseMod.addKeyword(modID, keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
             }
         }
-    }
-
-    @Override
-    public void receiveAddAudio() {
-
     }
 
     @Override

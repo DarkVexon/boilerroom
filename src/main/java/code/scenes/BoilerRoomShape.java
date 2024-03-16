@@ -13,9 +13,9 @@ public class BoilerRoomShape {
     private float x;
     private float y;
 
-    private static Texture circleTex = TexLoader.getTexture("img/scene/circle.png");
-    private static Texture squareTex = TexLoader.getTexture("img/scene/square.png");
-    private static Texture triangleTex = TexLoader.getTexture("img/scene/triangle.png");
+    private static Texture circleTex = TexLoader.getTexture("boilerResources/images/scene/circle.png");
+    private static Texture squareTex = TexLoader.getTexture("boilerResources/images/scene/square.png");
+    private static Texture triangleTex = TexLoader.getTexture("boilerResources/images/scene/triangle.png");
 
     public BoilerRoomShape() {
         int val = MathUtils.random(0, 2);

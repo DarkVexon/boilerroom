@@ -8,8 +8,10 @@ import com.megacrit.cardcrawl.actions.common.SpawnMonsterAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.*;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import static code.BoilerRoomMod.makeID;
 
@@ -37,6 +39,9 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
+        CardCrawlGame.music.unsilenceBGM();
+        AbstractDungeon.scene.fadeOutAmbiance();
+        AbstractDungeon.getCurrRoom().playBgmInstantly("boiler_boss");
         applyToSelf(new InvinciblePower(this, 100));
         addToBot(new TalkAction(this, "I won't allow it...", 0.5F, 1.5F));
         applyToPlayer(new LambdaPower("Demoted", AbstractPower.PowerType.BUFF, false, player(), -1) {
@@ -164,5 +169,14 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
                 turns -= 1;
                 break;
         }
+    }
+
+    @Override
+    public void die() {
+        this.useFastShakeAnimation(5.0F);
+        CardCrawlGame.screenShake.rumble(4.0F);
+        super.die();
+        this.onBossVictoryLogic();
+        this.onFinalBossVictoryLogic();
     }
 }

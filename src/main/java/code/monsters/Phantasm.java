@@ -48,6 +48,9 @@ public class Phantasm extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
+        CardCrawlGame.music.unsilenceBGM();
+        AbstractDungeon.scene.fadeOutAmbiance();
+        AbstractDungeon.getCurrRoom().playBgmInstantly("boiler_boss");
         AbstractDungeon.getCurrRoom().cannotLose = true;
     }
 

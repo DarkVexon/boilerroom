@@ -22,14 +22,12 @@ public class BoilerRoomScene extends AbstractScene {
     @Override
     public void renderCombatRoomBg(SpriteBatch sb) {
         sb.draw(tex, 0, 0);
-        for (BoilerRoomShape s : shapes) {
-            s.render(sb);
-        }
     }
 
     @Override
     public void renderCombatRoomFg(SpriteBatch sb) {
         sb.setColor(Color.WHITE.cpy());
+
     }
 
     @Override
@@ -40,9 +38,6 @@ public class BoilerRoomScene extends AbstractScene {
 
     @Override
     public void randomizeScene() {
-        shapes.clear();
-        for (int i = 0; i < MathUtils.random(3, 8); i++) {
-            shapes.add(new BoilerRoomShape());
-        }
+
     }
 }

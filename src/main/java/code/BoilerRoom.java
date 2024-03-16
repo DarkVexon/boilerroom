@@ -19,6 +19,8 @@ public class BoilerRoom extends CustomDungeon {
 
     public BoilerRoom() {
         super("Boiler Room", ID, "boilerResources/images/ui/panel.png", true, 2, 12, 10);
+        this.setMainMusic("boilerResources/audio/boiler.ogg");
+        this.addTempMusic("boiler_boss", "boilerResources/audio/boiler_boss.ogg");
     }
 
     public BoilerRoom(CustomDungeon cd, AbstractPlayer p, ArrayList<String> emptyList) {

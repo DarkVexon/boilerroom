@@ -5,6 +5,7 @@ import code.util.Wiz;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.*;
 
@@ -29,6 +30,9 @@ public class SlingBoy extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
+        CardCrawlGame.music.unsilenceBGM();
+        AbstractDungeon.scene.fadeOutAmbiance();
+        AbstractDungeon.getCurrRoom().playBgmInstantly("boiler_boss");
         addToBot(new TalkAction(this, "pshh-vrttt... ERROR! FOE HAS APPROACHED!", 0.5F, 2.0F));
         applyToSelf(new ArtifactPower(this, 150));
         applyToSelf(new MetallicizePower(this, calcAscensionSpecial(25)));
@@ -70,5 +74,14 @@ public class SlingBoy extends AbstractBoilerRoomMonster {
         } else {
             setMoveShortcut(ATTACK);
         }
+    }
+
+    @Override
+    public void die() {
+        this.useFastShakeAnimation(5.0F);
+        CardCrawlGame.screenShake.rumble(4.0F);
+        super.die();
+        this.onBossVictoryLogic();
+        this.onFinalBossVictoryLogic();
     }
 }
