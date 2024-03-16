@@ -21,7 +21,7 @@ public class IncenseSkittler extends AbstractBoilerRoomMonster {
     private static final byte INTANGIBLE = 2;
 
     public IncenseSkittler(float x, float y) {
-        super(NAME, ID, 1, x, y, 100, 100);
+        super(NAME, ID, 1, x, y, 200, 300);
         setHp(calcAscensionTankiness(45), calcAscensionTankiness(52));
 
         addMove(INCENSE, Intent.STRONG_DEBUFF);

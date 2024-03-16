@@ -1,9 +1,16 @@
 {
-  "${ModID}:TodoItem": {
-    "NAME": "Todo Item",
-    "FLAVOR": "TODO: make this a sweet relic.",
+  "${ModID}:DisablePowers": {
+    "NAME": "Power Down",
+    "FLAVOR": "You just lost the game btw",
     "DESCRIPTIONS": [
-      "Has no effect."
+      "You can't play #yPowers until turn #b3."
+    ]
+  },
+  "${ModID}:GiveBossStrength": {
+    "NAME": "Betraying Bond",
+    "FLAVOR": "Part of you is lost to the Boiler...",
+    "DESCRIPTIONS": [
+      "When you enter the Boss room, the Boss gains #b2 #yStrength."
     ]
   }
 }

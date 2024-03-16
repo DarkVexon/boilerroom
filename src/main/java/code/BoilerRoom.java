@@ -3,8 +3,10 @@ package code;
 import actlikeit.dungeons.CustomDungeon;
 import code.monsters.*;
 import code.scenes.BoilerRoomScene;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.MonsterInfo;
+import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.scenes.AbstractScene;
 
 import java.util.ArrayList;
@@ -18,6 +20,15 @@ public class BoilerRoom extends CustomDungeon {
     public BoilerRoom() {
         super(NAME, ID, "images/ui/panel.png", true, 2, 12, 10);
     }
+
+    public BoilerRoom(CustomDungeon cd, AbstractPlayer p, ArrayList<String> emptyList) {
+        super(cd, p, emptyList);
+    }
+
+    public BoilerRoom(CustomDungeon cd, AbstractPlayer p, SaveFile saveFile) {
+        super(cd, p, saveFile);
+    }
+
 
     @Override
     public String getOptionText() {

@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
 import static code.BoilerRoomMod.makeID;
-import static thePackmaster.SpireAnniversary5Mod.makeID;
 
 @AbstractCardModifier.SaveIgnore
 public class IsSpecterModifier extends AbstractCardModifier {

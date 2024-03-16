@@ -35,7 +35,7 @@ public class Phantasm extends AbstractBoilerRoomMonster {
     private int revives = 4;
 
     public Phantasm() {
-        super(NAME, ID, 1, 100, 100, 100, 100);
+        super(NAME, ID, 1, 100, 100, 350, 410);
         setHp(calcAscensionTankiness(150), calcAscensionTankiness(160));
 
         addMove(FORGETTING, Intent.ATTACK_DEBUFF, calcAscensionDamage(12));

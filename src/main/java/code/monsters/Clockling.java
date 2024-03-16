@@ -26,7 +26,7 @@ public class Clockling extends AbstractBoilerRoomMonster {
     private static final byte TOCK = 1;
 
     public Clockling(float x, float y) {
-        super(NAME, ID, 1, x, y, 100, 100);
+        super(NAME, ID, 1, x, y, 250, 275);
         setHp(calcAscensionTankiness(74), calcAscensionTankiness(82));
 
         addMove(TICK, Intent.BUFF);

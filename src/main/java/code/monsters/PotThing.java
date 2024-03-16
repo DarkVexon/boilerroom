@@ -23,7 +23,7 @@ public class PotThing extends AbstractBoilerRoomMonster {
     private static final byte ATTACK_BUFF = 1;
 
     public PotThing(float x, float y) {
-        super(NAME, ID, 1, x, y, 100, 100);
+        super(NAME, ID, 1, x, y, 140, 160);
         setHp(calcAscensionTankiness(54), calcAscensionTankiness(61));
 
         addMove(POT_STUFF, Intent.DEBUFF);

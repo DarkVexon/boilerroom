@@ -10,12 +10,12 @@ import com.megacrit.cardcrawl.scenes.AbstractScene;
 import java.util.ArrayList;
 
 public class BoilerRoomScene extends AbstractScene {
-    private static Texture tex = TexLoader.getTexture("img/scene/boiler");
-    private static Texture campfireBg = TexLoader.getTexture("img/scene/camp");
+    private static Texture tex = TexLoader.getTexture("boilerResources/images/scene/boiler.png");
+    private static Texture campfireBg = TexLoader.getTexture("boilerResources/images/scene/camp.png");
     private static ArrayList<BoilerRoomShape> shapes = new ArrayList<>();
 
     public BoilerRoomScene() {
-        super("");
+        super("beyondScene/scene.atlas");
 
     }
 

@@ -7,7 +7,7 @@ import static code.BoilerRoomMod.makeID;
 
 public abstract class AbstractBoilerRoomEvent extends PhasedEvent {
     public AbstractBoilerRoomEvent(String letter) {
-        super(makeID("FellInBoiler" + letter), "Fell In Boiler " + letter, "boilerResources/img/event/event.png");
+        super(makeID("FellInBoiler" + letter), "Fell In Boiler " + letter, "boilerResources/images/event/event.png");
 
         TextPhase.OptionInfo optionA = new TextPhase.OptionInfo(getAText());
         optionA.setOptionResult(integer -> {

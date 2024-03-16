@@ -16,7 +16,7 @@ public class Stinky extends AbstractBoilerRoomMonster {
     private static final byte STINK = 0;
 
     public Stinky(float x, float y) {
-        super(NAME, ID, 1, x, y, 100, 100);
+        super(NAME, ID, 1, x, y, 115, 85);
         setHp(calcAscensionTankiness(21), calcAscensionTankiness(26));
 
         addMove(STINK, Intent.DEBUFF);

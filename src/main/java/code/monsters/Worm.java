@@ -17,7 +17,7 @@ public class Worm extends AbstractBoilerRoomMonster {
     private static final byte BURROW = 2;
 
     public Worm(float x, float y) {
-        super(NAME, ID, 1, x, y, 50, 50);
+        super(NAME, ID, 1, x, y, 120, 130);
         setHp(calcAscensionTankiness(37), calcAscensionTankiness(41));
 
         addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(6), 2);
