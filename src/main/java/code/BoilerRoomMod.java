@@ -126,11 +126,11 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
     public void receivePostInitialize() {
         BoilerRoom boilerRoom = new BoilerRoom();
         boilerRoom.addAct(TheBeyond.ID);
-        boilerRoom.addBoss(Phantasm.ID, Phantasm::new, "boilerResources/img/map/phantasm.png", "boilerResources/img/map/phantasmOutline.png");
-        boilerRoom.addBoss(Globbleglibson.ID, Globbleglibson::new, "boilerResources/img/map/globbleglibson.png", "boilerResources/img/map/globbleglibsonOutline.png");
-        boilerRoom.addBoss(SlingBoy.ID, SlingBoy::new, "boilerResources/img/map/slingboy.png", "boilerResources/img/map/slingboyOutline.png");
+        boilerRoom.addBoss(Phantasm.ID, Phantasm::new, "boilerResources/images/map/phantasm.png", "boilerResources/images/map/phantasmOutline.png");
+        boilerRoom.addBoss(Globbleglibson.ID, Globbleglibson::new, "boilerResources/images/map/globbleglibson.png", "boilerResources/images/map/globbleglibsonOutline.png");
+        boilerRoom.addBoss(SlingBoy.ID, SlingBoy::new, "boilerResources/images/map/slingboy.png", "boilerResources/images/map/slingboyOutline.png");
 
-        BaseMod.addMonster(Craig.ID, () -> new MonsterGroup(new AbstractMonster[]{new Craig(100, 100)}));
+        BaseMod.addMonster(Craig.ID, () -> new MonsterGroup(new AbstractMonster[]{new Craig(-250, 1)}));
         BaseMod.addMonster("boiler:FlagbearerTwoChompers", "Flagbearer and Two Chompers", () -> new MonsterGroup(new AbstractMonster[]{
                 new CardChomper(-300, 0),
                 new CardChomper(-120, 0),
@@ -158,9 +158,9 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
                 new Marisa(0, 0)
         }));
         BaseMod.addMonster("boiler:StinkyChompCraig", "Stinky Chomp Craig", () -> new MonsterGroup(new AbstractMonster[]{
-                new Stinky(-100, 0),
-                new CardChomper(0, 0),
-                new Craig(100, 0)
+                new Stinky(-450, 0),
+                new CardChomper(-220, 0),
+                new Craig(1, 1)
         }));
         BaseMod.addMonster("boiler:IncenseSludgeStink", "Incense Sludge Stink", () -> new MonsterGroup(new AbstractMonster[]{
                 new IncenseSkittler(-400, 0),

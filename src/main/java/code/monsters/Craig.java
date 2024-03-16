@@ -37,7 +37,7 @@ public class Craig extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
-        applyToSelf(new RegenerateMonsterPower(this, calcAscensionSpecial(8)));
+        applyToSelf(new RegenerateMonsterPower(this, calcAscensionSpecial(12)));
     }
 
     @Override
