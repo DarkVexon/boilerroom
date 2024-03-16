@@ -27,7 +27,7 @@ public class Craig extends AbstractBoilerRoomMonster {
     private static final byte BLOCK_BONK = 2;
 
     public Craig(float x, float y) {
-        super(NAME, ID, 1, x, y, 200, 225);
+        super("The Craig", ID, 1, x, y, 200, 225);
         setHp(calcAscensionTankiness(115), calcAscensionTankiness(125));
 
         addMove(SMACK, Intent.ATTACK_DEBUFF, calcAscensionDamage(14));
@@ -66,6 +66,7 @@ public class Craig extends AbstractBoilerRoomMonster {
                 }
                 if (eligibleRelics.isEmpty()) {
                     addToBot(new TalkAction(this, "NO ... FOOD FOR CRAIG?", 0.5F, 2.0F));
+                    applyToSelf(new StrengthPower(this, calcAscensionSpecial(6)));
                 } else {
                     AbstractRelic target = Wiz.getRandomItem(eligibleRelics, AbstractDungeon.monsterRng);
                     addToBot(new TalkAction(this, "CRAIG... WANT... " + target.name + "...", 0.5F, 2.0F));

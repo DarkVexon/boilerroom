@@ -21,7 +21,7 @@ public class Lagavulin2 extends AbstractBoilerRoomMonster {
     private static final byte DEX_DOWN = 1;
 
     public Lagavulin2(float x, float y) {
-        super(NAME, ID, 1, x, y, 230, 260);
+        super("DARK AND EVIL Lagavulin", ID, 1, x, y, 230, 260);
         setHp(calcAscensionTankiness(175), calcAscensionTankiness(181));
 
         addMove(STR_DOWN, Intent.ATTACK_DEBUFF, calcAscensionDamage(18));

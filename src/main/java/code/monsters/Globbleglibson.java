@@ -25,7 +25,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
     private static final byte DEBUFFS = 4;
 
     public Globbleglibson() {
-        super(NAME, ID, 1, 100, 100, 333, 444);
+        super("Motherthing", ID, 1, 150, -1, 333, 444);
         setHp(calcAscensionTankiness(300), calcAscensionTankiness(320));
 
         addMove(TOTHIRTY, Intent.ATTACK, -1);
@@ -38,7 +38,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
     @Override
     public void usePreBattleAction() {
         applyToSelf(new InvinciblePower(this, 100));
-        addToBot(new TalkAction(this, "DEEEEE-MOTED!!!", 0.5F, 1.5F));
+        addToBot(new TalkAction(this, "I won't allow it...", 0.5F, 1.5F));
         applyToPlayer(new LambdaPower("Demoted", AbstractPower.PowerType.BUFF, false, player(), -1) {
 
             @Override
@@ -71,7 +71,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
         });
         if (AbstractDungeon.player.id.toLowerCase().contains("thorton")) {
             if (AbstractDungeon.ascensionLevel <= 19) {
-                addToBot(new TalkAction(this, "you ... seem familiar ...", 0.5F, 1.5F));
+                addToBot(new TalkAction(this, "Greed... is bad... Thorton.", 0.5F, 1.5F));
             } else {
                 addToBot(new TalkAction(this, "In time, you will understand.", 0.5F, 1.5F));
             }
@@ -88,10 +88,11 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
     public void executeTurn() {
         switch (this.nextMove) {
             case TOTHIRTY:
-                if (this.damage.get(0).base > 0) {
+                if (this.moves.get(TOTHIRTY).baseDamage > 0) {
                     hitPlayer(AbstractGameAction.AttackEffect.BLUNT_HEAVY);
                 } else {
                     addToBot(new TalkAction(this, "I think... you should... have rested.", 0.5F, 1.5F));
+                    applyToPlayer(new WeakPower(player(), calcAscensionSpecial(5), true));
                 }
                 break;
             case LAMEIFY:
@@ -138,11 +139,11 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
     protected void getMove(int i) {
         switch (turns) {
             case 1:
-                if (AbstractDungeon.player.currentHealth > 30) {
-                    this.damage.get(0).base = AbstractDungeon.player.currentHealth - 30;
+                if (AbstractDungeon.player.currentHealth > 28) {
+                    this.moves.get(TOTHIRTY).baseDamage = AbstractDungeon.player.currentHealth - 28;
                     setMoveShortcut(TOTHIRTY);
                 } else {
-                    setMove(TOTHIRTY, Intent.UNKNOWN);
+                    setMove(TOTHIRTY, Intent.BUFF);
                 }
                 turns += 1;
                 break;

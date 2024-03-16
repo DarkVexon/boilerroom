@@ -21,7 +21,7 @@ public class GumGum extends AbstractBoilerRoomMonster {
     private static final byte ATTACK_BLOCK = 2;
 
     public GumGum(float x, float y) {
-        super(NAME, ID, 1, x, y, 300, 260);
+        super("Immortal Thinker", ID, 1, x, y, 300, 260);
         setHp(calcAscensionTankiness(250), calcAscensionTankiness(261));
 
         addMove(DUMDUM, Intent.STRONG_DEBUFF);

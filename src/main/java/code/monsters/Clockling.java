@@ -24,7 +24,7 @@ public class Clockling extends AbstractBoilerRoomMonster {
     private static final byte TOCK = 1;
 
     public Clockling(float x, float y) {
-        super(NAME, ID, 1, x, y, 250, 275);
+        super("Clockling", ID, 1, x, y, 250, 275);
         setHp(calcAscensionTankiness(74), calcAscensionTankiness(82));
 
         addMove(TICK, Intent.BUFF);
@@ -46,6 +46,7 @@ public class Clockling extends AbstractBoilerRoomMonster {
                 if (!owner.isDead && !AbstractDungeon.isScreenUp && !(owner.currentHealth <= 0) && !owner.isDying && !owner.isDeadOrEscaped()) {
                     val -= Gdx.graphics.getDeltaTime();
                     if (val <= 0) {
+                        flash();
                         val = 3;
                         AbstractDungeon.player.damage(new DamageInfo(owner, amount, DamageInfo.DamageType.THORNS));
                     }

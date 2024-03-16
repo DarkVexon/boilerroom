@@ -1,5 +1,8 @@
 package code.monsters;
 
+import code.powers.LambdaPower;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.stslib.patches.NeutralPowertypePatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -18,9 +21,20 @@ public class InvisibleSlingBoy extends AbstractBoilerRoomMonster {
     private static final byte DEBUFF = 1;
 
     public InvisibleSlingBoy(float x, float y) {
-        super(NAME, ID, 1, x, y, 175, 50);
+        super("Sling Boy's Attack!", ID, 1, x, y, 175, 50);
         addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(7));
         addMove(DEBUFF, Intent.DEBUFF);
+        powers.add(new LambdaPower("Remote Attacker", NeutralPowertypePatch.NEUTRAL, false, this, -1) {
+            @Override
+            protected boolean canGoNegative() {
+                return false;
+            }
+
+            @Override
+            public void updateDescription() {
+                description = "The act's Boss can attack you from inside the Boss Room. Watch out!";
+            }
+        });
     }
 
     @Override
@@ -56,6 +70,10 @@ public class InvisibleSlingBoy extends AbstractBoilerRoomMonster {
         });
     }
 
+    @Override
+    public void renderHealth(SpriteBatch sb) {
+
+    }
 
     @Override
     public void executeTurn() {

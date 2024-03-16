@@ -17,9 +17,7 @@ import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.TheBeyond;
 import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
@@ -150,9 +148,9 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
         }));
         BaseMod.addMonster("boiler:GnatsSkittler", "Gnats + Skittler", GnatSkittlerGroup::new);
         BaseMod.addMonster("boiler:FlagbearerSludgeWorm", "Flagbearer Sludge Worm", () -> new MonsterGroup(new AbstractMonster[]{
-                new Flagbearer(-100, 0),
-                new SludgeMixer(0, 0),
-                new Worm(100, 0)
+                new SludgeMixer(-400, 0),
+                new Worm(-150, 150),
+                new Flagbearer(100, 0),
         }));
         BaseMod.addMonster(Marisa.ID, () -> new MonsterGroup(new AbstractMonster[]{
                 new Marisa(0, 0)
@@ -164,8 +162,8 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
         }));
         BaseMod.addMonster("boiler:IncenseSludgeStink", "Incense Sludge Stink", () -> new MonsterGroup(new AbstractMonster[]{
                 new IncenseSkittler(-400, 0),
-                new SludgeMixer(-190, 30),
-                new Stinky(100, 150)
+                new SludgeMixer(-140, 30),
+                new Stinky(125, 300)
         }));
 
         BaseMod.addMonster(GumGum.ID, () -> new MonsterGroup(new AbstractMonster[]{
@@ -181,7 +179,7 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
         }));
 
         BaseMod.addEvent("boiler:FellInBoiler1", BoilerEventCurses.class, BoilerRoom.ID);
-        BaseMod.addEvent("boiler:FellInBoiler2", BoilerEventGood.class, BoilerRoom.ID);
+        BaseMod.addEvent("boiler:FellInBoiler2", BoilerEventRightmostTwoRelics.class, BoilerRoom.ID);
         BaseMod.addEvent("boiler:FellInBoiler3", BoilerEventMarkOfBloom.class, BoilerRoom.ID);
         BaseMod.addEvent("boiler:FellInBoiler4", BoilerEventMaxHandSize.class, BoilerRoom.ID);
         BaseMod.addEvent("boiler:FellInBoiler5", BoilerEventPots.class, BoilerRoom.ID);

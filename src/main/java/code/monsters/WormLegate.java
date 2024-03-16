@@ -20,7 +20,7 @@ public class WormLegate extends AbstractBoilerRoomMonster {
     private AbstractMonster[] worms = new Worm[4];
 
     public WormLegate(float x, float y) {
-        super(NAME, ID, 1, x, y, 180, 190);
+        super("Worm Legate", ID, 1, x, y, 180, 190);
         setHp(calcAscensionTankiness(250), calcAscensionTankiness(261));
 
         addMove(SUMMON_WORMS, Intent.UNKNOWN);
@@ -70,7 +70,7 @@ public class WormLegate extends AbstractBoilerRoomMonster {
         if (firstMove) {
             firstMove = false;
             setMoveShortcut(SUMMON_WORMS, "SUMMON WORMS!!!");
-        }else {
+        } else {
             setMoveShortcut(SUMMON_WORM, "TRANSMOGRIFY FLESH INTO WORMS!!!");
         }
     }

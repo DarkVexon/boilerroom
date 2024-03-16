@@ -16,7 +16,7 @@ public class Stinky extends AbstractBoilerRoomMonster {
     private static final byte STINK = 0;
 
     public Stinky(float x, float y) {
-        super(NAME, ID, 1, x, y, 115, 85);
+        super("stinky!!!", ID, 1, x, y, 115, 85);
         setHp(calcAscensionTankiness(21), calcAscensionTankiness(26));
 
         addMove(STINK, Intent.DEBUFF);
@@ -27,7 +27,7 @@ public class Stinky extends AbstractBoilerRoomMonster {
         applyToSelf(new LambdaPower("Smells Bad", AbstractPower.PowerType.BUFF, false, this, calcAscensionSpecial(2)) {
             @Override
             public void updateDescription() {
-                description = "When #yStinky!!! dies, gain #b" + amount + " #yWeak, #yVulnerable, and #yFrail.";
+                description = "When #ystinky!!! dies, gain #b" + amount + " #yWeak, #yVulnerable, and #yFrail.";
             }
         });
     }

@@ -1,11 +1,11 @@
 package code.monsters;
 
-import basemod.BaseMod;
 import code.powers.LambdaPower;
 import code.util.Wiz;
 import code.vfx.StealRelicEffect;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.ClearCardQueueAction;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -35,8 +35,8 @@ public class Phantasm extends AbstractBoilerRoomMonster {
     private int revives = 4;
 
     public Phantasm() {
-        super(NAME, ID, 1, 100, 100, 350, 410);
-        setHp(calcAscensionTankiness(150), calcAscensionTankiness(160));
+        super(NAME, ID, 1, 0, 0, 350, 410);
+        setHp(calcAscensionTankiness(160), calcAscensionTankiness(170));
 
         addMove(FORGETTING, Intent.ATTACK_DEBUFF, calcAscensionDamage(12));
         addMove(POISON, Intent.STRONG_DEBUFF);
@@ -49,8 +49,17 @@ public class Phantasm extends AbstractBoilerRoomMonster {
     @Override
     public void usePreBattleAction() {
         AbstractDungeon.getCurrRoom().cannotLose = true;
+    }
+
+    public void atStartOfTurnPostDrawTurnOne() {
         addToBot(new TalkAction(this, "Nice hand... SAY GOODBYE TO IT!!", 0.5F, 2.0F));
-        addToBot(new ExhaustAction(BaseMod.MAX_HAND_SIZE, true, true));
+        addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                addToTop(new ExhaustAction(AbstractDungeon.player.hand.size(), true, false));
+            }
+        });
     }
 
     @Override
@@ -68,7 +77,13 @@ public class Phantasm extends AbstractBoilerRoomMonster {
                     @Override
                     public void atStartOfTurnPostDraw() {
                         flash();
-                        addToBot(new ExhaustAction(amount, true, true));
+                        addToBot(new AbstractGameAction() {
+                            @Override
+                            public void update() {
+                                isDone = true;
+                                addToTop(new ExhaustAction(Math.min(AbstractDungeon.player.hand.size(), 2), true, false));
+                            }
+                        });
                     }
 
                     @Override
@@ -113,25 +128,35 @@ public class Phantasm extends AbstractBoilerRoomMonster {
                         addToBot(new HealAction(this, this, this.maxHealth));
                         applyToSelf(new ArtifactPower(this, 10));
                         revives -= 1;
+                        break;
                     case 3:
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
+                        applyToSelf(new ArtifactPower(this, 10));
                         applyToSelf(new MalleablePower(this, 10));
                         revives -= 1;
+                        break;
                     case 2:
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
+                        applyToSelf(new ArtifactPower(this, 10));
+                        applyToSelf(new MalleablePower(this, 10));
                         applyToSelf(new BufferPower(this, 5));
                         revives -= 1;
+                        break;
                     case 1:
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
+                        applyToSelf(new ArtifactPower(this, 10));
+                        applyToSelf(new MalleablePower(this, 10));
+                        applyToSelf(new BufferPower(this, 5));
                         applyToSelf(new IntangiblePower(this, 5));
                         revives -= 1;
                         addToBot(new CanLoseAction());
+                        break;
                 }
         }
     }
@@ -165,10 +190,16 @@ public class Phantasm extends AbstractBoilerRoomMonster {
                     break;
                 case 1:
                     addToBot(new TalkAction(this, "Please... just a few more turns... I'll win...", 0.5F, 2F));
-                    addToBot(new TalkAction(this, "How will you fare... with no Relics...?", 0.5F, 2F));
+                    addToBot(new TalkAction(this, "how will you fare... with no Relics...?", 0.5F, 2F));
                     for (AbstractRelic r : AbstractDungeon.player.relics) {
-                        AbstractDungeon.player.loseRelic(r.relicId);
-                        AbstractDungeon.effectList.add(new StealRelicEffect(r, this));
+                        AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+                            @Override
+                            public void update() {
+                                isDone = true;
+                                AbstractDungeon.player.loseRelic(r.relicId);
+                                AbstractDungeon.effectList.add(new StealRelicEffect(r, Phantasm.this));
+                            }
+                        });
                     }
                     break;
             }
@@ -190,7 +221,7 @@ public class Phantasm extends AbstractBoilerRoomMonster {
 
     @Override
     protected void getMove(int i) {
-        if (Wiz.getAllCardsInCardGroups(true, false).isEmpty()) {
+        if (Wiz.getAllCardsInCardGroups(true, false).isEmpty() && GameActionManager.turn != 1) {
             setMoveShortcut(NUKE, "Forgotten");
         } else {
             if (!player().hasPower("boiler:Forgetting")) {
