@@ -212,8 +212,4 @@ public class Wiz {
         }
         return foe;
     }
-
-    public static void playAudio(ProAudio a) {
-        CardCrawlGame.sound.play(makeID(a.name()));
-    }
 }

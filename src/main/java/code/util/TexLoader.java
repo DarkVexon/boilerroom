@@ -48,11 +48,6 @@ public class TexLoader {
         return Gdx.files.internal(filePath).exists();
     }
 
-    public static TextureAtlas.AtlasRegion getTextureAsAtlasRegion(String textureString) {
-        Texture texture = getTexture(textureString);
-        return ImageHelper.asAtlasRegion(texture);
-    }
-
 
     @SpirePatch(clz = Texture.class, method="dispose")
     public static class DisposeListener {

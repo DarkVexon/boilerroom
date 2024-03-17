@@ -42,8 +42,8 @@ public class Worm extends AbstractBoilerRoomMonster {
                 applyToPlayer(new WeakPower(player(), 1, true));
                 break;
             case BURROW:
-                addToBot(new LoseHPAction(this, this, this.currentHealth));
                 addToBot(new AddCardToDeckAction(new WormCard()));
+                addToBot(new LoseHPAction(this, this, this.currentHealth));
                 break;
         }
     }
