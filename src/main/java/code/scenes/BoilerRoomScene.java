@@ -28,7 +28,6 @@ public class BoilerRoomScene extends AbstractScene {
     @Override
     public void renderCombatRoomFg(SpriteBatch sb) {
         sb.setColor(Color.WHITE.cpy());
-
     }
 
     @Override

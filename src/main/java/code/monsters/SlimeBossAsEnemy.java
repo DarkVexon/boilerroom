@@ -156,20 +156,6 @@ public class SlimeBossAsEnemy extends AbstractMonster {
     public void die() {
         super.die();
         CardCrawlGame.sound.play("VO_SLIMEBOSS_2A");
-        Iterator var1 = AbstractDungeon.actionManager.actions.iterator();
-
-        AbstractGameAction a;
-        do {
-            if (!var1.hasNext()) {
-                if (this.currentHealth <= 0) {
-                    this.useFastShakeAnimation(5.0F);
-                }
-
-                return;
-            }
-
-            a = (AbstractGameAction) var1.next();
-        } while (!(a instanceof SpawnMonsterAction));
 
     }
 

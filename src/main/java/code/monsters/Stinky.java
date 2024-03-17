@@ -27,7 +27,7 @@ public class Stinky extends AbstractBoilerRoomMonster {
         applyToSelf(new LambdaPower("Smells Bad", AbstractPower.PowerType.BUFF, false, this, calcAscensionSpecial(2)) {
             @Override
             public void updateDescription() {
-                description = "When #ystinky!!! dies, gain #b" + amount + " #yWeak, #yVulnerable, and #yFrail.";
+                description = "When #ystinky!!! dies, you gain #b" + amount + " #yWeak, #yVulnerable, and #yFrail.";
             }
 
             @Override

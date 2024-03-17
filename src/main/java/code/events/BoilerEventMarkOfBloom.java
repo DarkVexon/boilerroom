@@ -22,7 +22,7 @@ public class BoilerEventMarkOfBloom extends AbstractBoilerRoomEvent{
 
     @Override
     protected String getCDoneText() {
-        return "You climb out of the boiler, but all your potions broke and the glass shards made you lose max HP.";
+        return "You climb out of the boiler, but all your potions broke.";
     }
 
     @Override
@@ -41,7 +41,6 @@ public class BoilerEventMarkOfBloom extends AbstractBoilerRoomEvent{
     protected void doC() {
         AbstractDungeon.player.potionSlots = 0;
         AbstractDungeon.player.potions.clear();
-        AbstractDungeon.player.decreaseMaxHealth(AbstractDungeon.player.getAscensionMaxHPLoss()*2);
     }
 
     @Override
@@ -56,6 +55,6 @@ public class BoilerEventMarkOfBloom extends AbstractBoilerRoomEvent{
 
     @Override
     protected String getCText() {
-        return "Lose all your potion slots and " + AbstractDungeon.player.getAscensionMaxHPLoss()*2 + " Max HP.";
+        return "Lose all your potion slots.";
     }
 }

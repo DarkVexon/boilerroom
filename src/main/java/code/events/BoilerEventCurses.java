@@ -47,7 +47,6 @@ public class BoilerEventCurses extends AbstractBoilerRoomEvent{
         AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Slimed(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
         AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Slimed(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
         AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Slimed(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
-        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Slimed(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
     }
 
     @Override
@@ -62,6 +61,6 @@ public class BoilerEventCurses extends AbstractBoilerRoomEvent{
 
     @Override
     protected String getCText() {
-        return "Obtain four Slimed.";
+        return "Obtain three Slimed.";
     }
 }
