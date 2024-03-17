@@ -21,7 +21,7 @@ public class Marisa extends AbstractBoilerRoomMonster {
 
     private static final byte ATTACK = 0;
 
-    private int attackAmt = 8;
+    private int attackAmt = 4;
 
     public Marisa(float x, float y) {
         super("Marisa from Touhou", ID, 1, x, y, 333, 325);

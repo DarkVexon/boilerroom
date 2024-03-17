@@ -56,6 +56,6 @@ public class BoilerEventMarkOfBloom extends AbstractBoilerRoomEvent{
 
     @Override
     protected String getCText() {
-        return "Lose " + AbstractDungeon.player.getAscensionMaxHPLoss()*2 + " Max HP.";
+        return "Lose all your potion slots and " + AbstractDungeon.player.getAscensionMaxHPLoss()*2 + " Max HP.";
     }
 }

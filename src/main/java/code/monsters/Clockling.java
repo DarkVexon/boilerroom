@@ -25,7 +25,7 @@ public class Clockling extends AbstractBoilerRoomMonster {
 
     public Clockling(float x, float y) {
         super("Clockling", ID, 1, x, y, 250, 275);
-        setHp(calcAscensionTankiness(74), calcAscensionTankiness(82));
+        setHp(calcAscensionTankiness(65), calcAscensionTankiness(72));
 
         addMove(TICK, Intent.BUFF);
         addMove(TOCK, Intent.DEBUFF);
@@ -37,7 +37,7 @@ public class Clockling extends AbstractBoilerRoomMonster {
 
             @Override
             protected void onCreated() {
-                val = 3;
+                val = 4;
             }
 
             @Override
@@ -47,7 +47,7 @@ public class Clockling extends AbstractBoilerRoomMonster {
                     val -= Gdx.graphics.getDeltaTime();
                     if (val <= 0) {
                         flash();
-                        val = 3;
+                        val = 4;
                         AbstractDungeon.player.damage(new DamageInfo(owner, amount, DamageInfo.DamageType.THORNS));
                     }
                 }
@@ -55,7 +55,7 @@ public class Clockling extends AbstractBoilerRoomMonster {
 
             @Override
             public void updateDescription() {
-                description = "#yClockling deals #b" + amount + " damage to you every #b3 seconds. Yes, this counts animations. No, it doesn't pause at any point. Why are you still reading this? I mean if you want to keep reading instead of playing cards, be my guest. I hope you had a good breakfast today, like it was REALLY good. I'm gonna have a chocolate chip cookie later. That's gonna be great. Do you like chocolate chip cookies?";
+                description = "#yClockling deals #b" + amount + " damage to you every #b4 seconds. Yes, this counts animations. No, it doesn't pause at any point. Why are you still reading this? I mean if you want to keep reading instead of playing cards, be my guest. I hope you had a good breakfast today, like it was REALLY good. I'm gonna have a chocolate chip cookie later. That's gonna be great. Do you like chocolate chip cookies?";
             }
         });
     }

@@ -16,7 +16,8 @@ public class BoilerRoomScene extends AbstractScene {
 
     public BoilerRoomScene() {
         super("beyondScene/scene.atlas");
-
+        this.ambianceName = "AMBIANCE_BEYOND";
+        this.fadeInAmbiance();
     }
 
     @Override
