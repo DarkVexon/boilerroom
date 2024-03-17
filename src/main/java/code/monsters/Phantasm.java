@@ -36,7 +36,7 @@ public class Phantasm extends AbstractBoilerRoomMonster {
 
     public Phantasm() {
         super(NAME, ID, 1, 0, 0, 350, 410);
-        setHp(calcAscensionTankiness(160), calcAscensionTankiness(170));
+        setHp(calcAscensionTankiness(155), calcAscensionTankiness(162));
 
         addMove(FORGETTING, Intent.ATTACK_DEBUFF, calcAscensionDamage(12));
         addMove(POISON, Intent.STRONG_DEBUFF);

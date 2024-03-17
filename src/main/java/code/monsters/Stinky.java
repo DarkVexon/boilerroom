@@ -29,6 +29,13 @@ public class Stinky extends AbstractBoilerRoomMonster {
             public void updateDescription() {
                 description = "When #ystinky!!! dies, gain #b" + amount + " #yWeak, #yVulnerable, and #yFrail.";
             }
+
+            @Override
+            public void onDeath() {
+                applyToPlayer(new WeakPower(player(), amount, true));
+                applyToPlayer(new VulnerablePower(player(), amount, true));
+                applyToPlayer(new FrailPower(player(), amount, true));
+            }
         });
     }
 

@@ -17,12 +17,12 @@ public class Gnat extends AbstractBoilerRoomMonster {
     public static final byte ATTACK_REGULAR = 2;
 
     public Gnat(float x, float y) {
-        super(NAME, ID, 1, x, y, 45, 25);
+        super(NAME, ID, 1, x, y, 55, 40);
         setHp(calcAscensionTankiness(3), calcAscensionTankiness(5));
 
         addMove(SKIP, Intent.UNKNOWN);
-        addMove(ATTACK_TINY, Intent.ATTACK, calcAscensionDamage(2));
-        addMove(ATTACK_REGULAR, Intent.ATTACK, calcAscensionDamage(4));
+        addMove(ATTACK_TINY, Intent.ATTACK, calcAscensionDamage(1));
+        addMove(ATTACK_REGULAR, Intent.ATTACK, calcAscensionDamage(3));
     }
 
     @Override

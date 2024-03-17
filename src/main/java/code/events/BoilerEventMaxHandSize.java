@@ -20,7 +20,7 @@ public class BoilerEventMaxHandSize extends AbstractBoilerRoomEvent {
 
     @Override
     protected String getBDoneText() {
-        return "You climb out of the boiler, but all your gold fell out of your pockets.";
+        return "You climb out of the boiler, but it took so long the boss got strong.";
     }
 
     @Override
