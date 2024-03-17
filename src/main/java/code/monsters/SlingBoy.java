@@ -38,7 +38,7 @@ public class SlingBoy extends AbstractBoilerRoomMonster {
         applyToSelf(new MetallicizePower(this, calcAscensionSpecial(25)));
         addToBot(new TalkAction(this, "RUNNING PROCESS: POT_CARDS...", 0.5F, 2.0F));
         for (AbstractCard c : Wiz.getAllCardsInCardGroups(true, false)) {
-            if (!(c instanceof PottedCard))
+            if (!(c instanceof PottedCard) && c.cost > -1)
                 potCard(c);
         }
         addToBot(new TalkAction(this, "RUNNING PROCESS: ADD_SCALING...", 0.5F, 2.0F));

@@ -1,5 +1,6 @@
 package code.monsters;
 
+import basemod.ReflectionHacks;
 import code.powers.LambdaPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
@@ -31,7 +32,9 @@ public class IncenseSkittler extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
-        applyToSelf(new IntangiblePower(this, 1));
+        AbstractPower p = new IntangiblePower(this, 1);
+        ReflectionHacks.setPrivate(p, AbstractPower.class, "justApplied", false);
+        applyToSelf(p);
     }
 
     @Override
