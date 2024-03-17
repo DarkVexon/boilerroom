@@ -1,6 +1,7 @@
 package code.monsters;
 
 import code.powers.LambdaPower;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FrailPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
@@ -19,7 +20,7 @@ public class Stinky extends AbstractBoilerRoomMonster {
         super("stinky!!!", ID, 1, x, y, 115, 85);
         setHp(calcAscensionTankiness(21), calcAscensionTankiness(26));
 
-        addMove(STINK, Intent.DEBUFF);
+        addMove(STINK, Intent.ATTACK_DEBUFF, calcAscensionDamage(4));
     }
 
     @Override
@@ -49,6 +50,7 @@ public class Stinky extends AbstractBoilerRoomMonster {
     public void executeTurn() {
         switch (this.nextMove) {
             case STINK:
+                hitPlayer(AbstractGameAction.AttackEffect.BLUNT_LIGHT);
                 applyToPlayer(new WeakPower(player(), 1, true));
                 applyToPlayer(new FrailPower(player(), 1, true));
                 break;

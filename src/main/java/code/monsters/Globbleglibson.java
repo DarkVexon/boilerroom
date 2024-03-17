@@ -1,11 +1,14 @@
 package code.monsters;
 
 import code.powers.LambdaPower;
+import code.util.Wiz;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.actions.common.SpawnMonsterAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -30,7 +33,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
         setHp(calcAscensionTankiness(301), calcAscensionTankiness(320));
 
         addMove(TOTHIRTY, Intent.ATTACK, -1);
-        addMove(LAMEIFY, Intent.DEBUFF);
+        addMove(LAMEIFY, Intent.DEFEND_DEBUFF);
         addMove(SUMMONSLIMEBOSS, Intent.UNKNOWN);
         addMove(SQUASH, Intent.DEBUFF);
         addMove(DEBUFFS, Intent.ATTACK_DEBUFF, calcAscensionDamage(16));
@@ -93,6 +96,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
                 }
                 break;
             case LAMEIFY:
+                addToBot(new GainBlockAction(this, 18));
                 applyToPlayer(new LambdaPower("Lame", AbstractPower.PowerType.DEBUFF, false, player(), -1) {
                     @Override
                     public void onPlayCard(AbstractCard card, AbstractMonster m) {
@@ -118,10 +122,31 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
                 break;
             case SUMMONSLIMEBOSS:
                 addToBot(new SpawnMonsterAction(new SlimeBossAsEnemy(this.hb_x - 320, this.hb_y), false));
+                applyToSelf(new LambdaPower("Guarded", AbstractPower.PowerType.BUFF, false, this, -1) {
+                    @Override
+                    protected boolean canGoNegative() {
+                        return false;
+                    }
+
+                    @Override
+                    public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
+                        if (damageAmount >= owner.currentHealth && Wiz.getEnemies().size() > 1) {
+                            this.flash();
+                            return owner.currentHealth - 1;
+                        } else {
+                            return damageAmount;
+                        }
+                    }
+
+                    @Override
+                    public void updateDescription() {
+                        description = "#yMotherthing cannot fall below 1 HP if other enemies exist.";
+                    }
+                });
                 break;
             case SQUASH:
                 applyToPlayer(new ConstrictedPower(player(), this, calcAscensionSpecial(6)));
-                addToBot(new HealAction(this, this, calcAscensionSpecial(6)));
+                addToBot(new HealAction(this, this, calcAscensionSpecial(12)));
                 break;
             case DEBUFFS:
                 hitPlayer(AbstractGameAction.AttackEffect.FIRE);

@@ -105,8 +105,8 @@ public class SlimeBossAsEnemy extends AbstractMonster {
                 AbstractDungeon.actionManager.addToBottom(new SuicideAction(this, false));
                 AbstractDungeon.actionManager.addToBottom(new WaitAction(1.0F));
                 AbstractDungeon.actionManager.addToBottom(new SFXAction("SLIME_SPLIT"));
-                AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new SpikeSlime_L(-385.0F, 20.0F, 0, this.currentHealth), false));
-                AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new AcidSlime_L(120.0F, -8.0F, 0, this.currentHealth), false));
+                AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new SpikeSlime_L(-605.0F, 20.0F, 0, this.currentHealth), false));
+                AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new AcidSlime_L(-250.0F, 140.0F, 0, this.currentHealth), false));
                 AbstractDungeon.actionManager.addToBottom(new CanLoseAction());
                 this.setMove(SPLIT_NAME, (byte) 3, Intent.UNKNOWN);
                 break;

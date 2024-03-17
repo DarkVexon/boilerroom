@@ -4,6 +4,7 @@ import code.cards.PottedCard;
 import code.util.Wiz;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -22,7 +23,7 @@ public class SlingBoy extends AbstractBoilerRoomMonster {
 
     public SlingBoy() {
         super("Sling Boy", ID, 1, 0, 0, 200, 200);
-        setHp(calcAscensionTankiness(200), calcAscensionTankiness(222));
+        setHp(calcAscensionTankiness(222), calcAscensionTankiness(222));
 
         addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(7));
         addMove(DEBUFF, Intent.DEBUFF);
@@ -35,7 +36,10 @@ public class SlingBoy extends AbstractBoilerRoomMonster {
         AbstractDungeon.getCurrRoom().playBgmInstantly("boiler_boss");
         addToBot(new TalkAction(this, "pshh-vrttt... ERROR! FOE HAS APPROACHED!", 0.5F, 2.0F));
         applyToSelf(new ArtifactPower(this, 150));
-        applyToSelf(new MetallicizePower(this, calcAscensionSpecial(25)));
+        applyToSelf(new MetallicizePower(this, calcAscensionSpecial(15)));
+        applyToSelf(new PlatedArmorPower(this, calcAscensionSpecial(20)));
+        addToBot(new GainBlockAction(this, calcAscensionSpecial(35)));
+        applyToSelf(new BarricadePower(this));
         addToBot(new TalkAction(this, "RUNNING PROCESS: POT_CARDS...", 0.5F, 2.0F));
         for (AbstractCard c : Wiz.getAllCardsInCardGroups(true, false)) {
             if (!(c instanceof PottedCard) && c.cost > -1)

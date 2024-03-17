@@ -32,7 +32,7 @@ public class PotThing extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
-        applyToSelf(new LambdaPower("Ceramic Shield", AbstractPower.PowerType.BUFF, false, this, calcAscensionSpecial(8)) {
+        applyToSelf(new LambdaPower("Ceramic Shield", AbstractPower.PowerType.BUFF, false, this, 8) {
             @Override
             public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
                 if (info.owner != null && info.type != DamageInfo.DamageType.HP_LOSS && damageAmount > amount) {

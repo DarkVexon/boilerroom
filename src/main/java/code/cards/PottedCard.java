@@ -21,6 +21,10 @@ public class PottedCard extends AbstractEasyCard {
         super(ID, input.cost, CardType.SKILL, CardRarity.SPECIAL, CardTarget.NONE, CardColor.COLORLESS);
         this.held = input;
         rawDescription = "Play the " + input.cost + " cost card in this Pot.";
+        if (input.type == CardType.POWER || input.exhaust) {
+            this.exhaust = true;
+            rawDescription = rawDescription + " NL Exhaust.";
+        }
         initializeDescription();
     }
 

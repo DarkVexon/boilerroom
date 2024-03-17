@@ -25,7 +25,7 @@ public class Flagbearer extends AbstractBoilerRoomMonster {
         super(NAME, ID, 1, x, y, 160F, 150F);
         setHp(calcAscensionTankiness(54), calcAscensionTankiness(59));
 
-        addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(12));
+        addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(11));
         addMove(RALLYING_CRY, Intent.BUFF);
     }
 

@@ -22,7 +22,7 @@ public class GumGum extends AbstractBoilerRoomMonster {
 
     public GumGum(float x, float y) {
         super("Immortal Thinker", ID, 1, x, y, 300, 260);
-        setHp(calcAscensionTankiness(250), calcAscensionTankiness(261));
+        setHp(calcAscensionTankiness(238), calcAscensionTankiness(247));
 
         addMove(DUMDUM, Intent.STRONG_DEBUFF);
         addMove(CURIOUS, Intent.UNKNOWN);
@@ -31,7 +31,7 @@ public class GumGum extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
-        applyToSelf(new CuriosityPower(this, calcAscensionSpecial(4)));
+        applyToSelf(new CuriosityPower(this, calcAscensionSpecial(3)));
     }
 
     @Override

@@ -2,10 +2,12 @@ package code.monsters;
 
 import code.cards.SpecterCard;
 import code.powers.LambdaPower;
+import code.util.Wiz;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -79,6 +81,7 @@ public class Marisa extends AbstractBoilerRoomMonster {
         addToBot(new TalkAction(this, "I'm Marisa from Touhou", 0.5F, 2.0F));
         useFastAttackAnimation();
         addToBot(new DamageAction(AbstractDungeon.player, new DamageInfo(this, attackAmt, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.FIRE));
+        Wiz.shuffleIn(new Burn());
         attackAmt *= 2;
     }
 

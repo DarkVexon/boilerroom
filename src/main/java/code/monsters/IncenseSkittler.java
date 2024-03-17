@@ -23,17 +23,17 @@ public class IncenseSkittler extends AbstractBoilerRoomMonster {
 
     public IncenseSkittler(float x, float y) {
         super("Incense Skittler", ID, 1, x, y, 200, 300);
-        setHp(calcAscensionTankiness(45), calcAscensionTankiness(52));
+        setHp(calcAscensionTankiness(48), calcAscensionTankiness(54));
 
         addMove(INCENSE, Intent.STRONG_DEBUFF);
-        addMove(ATTACK, Intent.ATTACK, 1);
+        addMove(ATTACK, Intent.ATTACK, 5);
         addMove(INTANGIBLE, Intent.BUFF);
     }
 
     @Override
     public void usePreBattleAction() {
         AbstractPower p = new IntangiblePower(this, 1);
-        ReflectionHacks.setPrivate(p, AbstractPower.class, "justApplied", false);
+        ReflectionHacks.setPrivate(p, IntangiblePower.class, "justApplied", false);
         applyToSelf(p);
     }
 
