@@ -23,7 +23,7 @@ public class IncenseSkittler extends AbstractBoilerRoomMonster {
 
     public IncenseSkittler(float x, float y) {
         super("Incense Skittler", ID, 1, x, y, 200, 300);
-        setHp(calcAscensionTankiness(48), calcAscensionTankiness(54));
+        setHp(calcAscensionTankiness(44), calcAscensionTankiness(50));
 
         addMove(INCENSE, Intent.STRONG_DEBUFF);
         addMove(ATTACK, Intent.ATTACK, 5);
@@ -50,7 +50,7 @@ public class IncenseSkittler extends AbstractBoilerRoomMonster {
                 applyToPlayer(new LambdaPower("Incense", AbstractPower.PowerType.DEBUFF, false, AbstractDungeon.player, calcAscensionSpecial(2)) {
                     @Override
                     public int onAttacked(DamageInfo info, int damageAmount) {
-                        if (info.owner != null && info.owner != this.owner && info.type != DamageInfo.DamageType.HP_LOSS && info.type != DamageInfo.DamageType.THORNS && damageAmount <= 0 && info.output > 0) {
+                        if (info.owner != this.owner && info.type != DamageInfo.DamageType.HP_LOSS && damageAmount <= 0 && info.output > 0) {
                             this.flash();
                             AbstractDungeon.actionManager.addToTop(new LoseHPAction(owner, owner, amount));
                         }
