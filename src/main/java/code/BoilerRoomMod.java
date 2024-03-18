@@ -128,20 +128,20 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
                 new CardChomper(-120, 0),
                 new Flagbearer(125, 10)
         }));
-        BaseMod.addMonster("boiler:TwoPotsAndWorm", "Two Pots + Worm", () -> new MonsterGroup(new AbstractMonster[]{
+        BaseMod.addMonster("boiler:TwoPotsAndWorm", "Two Pots and Worm", () -> new MonsterGroup(new AbstractMonster[]{
                 new PotThing(-200, 0),
                 new PotThing(0, 0),
                 new Worm(175, 10)
         }));
 
         BaseMod.addMonster("boiler:FiftyGnats", "Fifty Fucking Gnats", GnatMonsterGroup::new);
-        BaseMod.addMonster("boiler:IncenseClockPot", "Incence, Clock, Pot", () -> new MonsterGroup(new AbstractMonster[]{
+        BaseMod.addMonster("boiler:IncenseClockPot", "Clockling and Friends", () -> new MonsterGroup(new AbstractMonster[]{
                 new IncenseSkittler(-525, 0),
                 new Clockling(-140, 10),
                 new PotThing(150, 0)
         }));
-        BaseMod.addMonster("boiler:GnatsSkittler", "Gnats + Skittler", GnatSkittlerGroup::new);
-        BaseMod.addMonster("boiler:FlagbearerSludgeWorm", "Flagbearer Sludge Worm", () -> new MonsterGroup(new AbstractMonster[]{
+        BaseMod.addMonster("boiler:GnatsSkittler", "Incensed Gnats", GnatSkittlerGroup::new);
+        BaseMod.addMonster("boiler:FlagbearerSludgeWorm", "Flagbearer and Sludge Mixer", () -> new MonsterGroup(new AbstractMonster[]{
                 new SludgeMixer(-400, 0),
                 new Worm(-150, 150),
                 new Flagbearer(100, 0),
@@ -149,12 +149,12 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
         BaseMod.addMonster(Marisa.ID, () -> new MonsterGroup(new AbstractMonster[]{
                 new Marisa(0, 0)
         }));
-        BaseMod.addMonster("boiler:StinkyChompCraig", "Stinky Chomp Craig", () -> new MonsterGroup(new AbstractMonster[]{
+        BaseMod.addMonster("boiler:StinkyChompCraig", "Craig and Co.", () -> new MonsterGroup(new AbstractMonster[]{
                 new Stinky(-450, 0),
                 new CardChomper(-220, 0),
                 new Craig(1, 1)
         }));
-        BaseMod.addMonster("boiler:IncenseSludgeStink", "Incense Sludge Stink", () -> new MonsterGroup(new AbstractMonster[]{
+        BaseMod.addMonster("boiler:IncenseSludgeStink", "Sludge Mixer and Stall", () -> new MonsterGroup(new AbstractMonster[]{
                 new IncenseSkittler(-400, 0),
                 new SludgeMixer(-140, 30),
                 new Stinky(125, 300)

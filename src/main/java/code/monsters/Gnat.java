@@ -62,14 +62,6 @@ public class Gnat extends AbstractBoilerRoomMonster {
         }
     }
 
-    public void damage(DamageInfo info) {
-        if (info.output > 0 && this.hasPower("Intangible")) {
-            info.output = 1;
-        }
-
-        super.damage(info);
-    }
-
     @Override
     public void executeTurn() {
         switch (this.nextMove) {

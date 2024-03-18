@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.IntangiblePower;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -129,6 +130,14 @@ public abstract class AbstractBoilerRoomMonster extends CustomMonster {
                 break;
         }
         return Math.round(base);
+    }
+
+    public void damage(DamageInfo info) {
+        if (info.output > 0 && this.hasPower(IntangiblePower.POWER_ID)) {
+            info.output = 1;
+        }
+
+        super.damage(info);
     }
 
     @Override
