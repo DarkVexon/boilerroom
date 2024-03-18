@@ -46,10 +46,7 @@ public class Marisa extends AbstractBoilerRoomMonster {
 
             @Override
             public boolean onReceivePower(AbstractPower abstractPower, AbstractCreature target, AbstractCreature source) {
-                if (abstractPower.type == PowerType.DEBUFF) {
-                    return false;
-                }
-                return true;
+                return abstractPower.type != PowerType.DEBUFF;
             }
 
             @Override

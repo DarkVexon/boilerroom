@@ -48,12 +48,10 @@ public class Stinky extends AbstractBoilerRoomMonster {
 
     @Override
     public void executeTurn() {
-        switch (this.nextMove) {
-            case STINK:
-                hitPlayer(AbstractGameAction.AttackEffect.BLUNT_LIGHT);
-                applyToPlayer(new WeakPower(player(), 1, true));
-                applyToPlayer(new FrailPower(player(), 1, true));
-                break;
+        if (this.nextMove == STINK) {
+            hitPlayer(AbstractGameAction.AttackEffect.BLUNT_LIGHT);
+            applyToPlayer(new WeakPower(player(), 1, true));
+            applyToPlayer(new FrailPower(player(), 1, true));
         }
     }
 

@@ -25,11 +25,7 @@ public class DisablePowers extends AbstractEasyRelic {
     @Override
     public boolean canPlay(AbstractCard card) {
         if (card.type == AbstractCard.CardType.POWER) {
-            if (counter >= 3) {
-                return true;
-            } else {
-                return false;
-            }
+            return counter >= 3;
         }
         return true;
     }

@@ -18,7 +18,7 @@ public class Gnat extends AbstractBoilerRoomMonster {
     public static final byte ATTACK_TINY = 1;
     public static final byte ATTACK_REGULAR = 2;
 
-    private float baseDrawY;
+    private final float baseDrawY;
 
     public Gnat(float x, float y) {
         super(NAME, ID, 1, x, y, 55, 40);

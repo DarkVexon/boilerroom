@@ -6,11 +6,9 @@ import com.megacrit.cardcrawl.cards.curses.Writhe;
 import com.megacrit.cardcrawl.cards.status.Slimed;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.relics.GremlinMask;
-import com.megacrit.cardcrawl.relics.MarkOfTheBloom;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
-public class BoilerEventCurses extends AbstractBoilerRoomEvent{
+public class BoilerEventCurses extends AbstractBoilerRoomEvent {
     public BoilerEventCurses() {
         super("1");
     }
@@ -32,21 +30,21 @@ public class BoilerEventCurses extends AbstractBoilerRoomEvent{
 
     @Override
     protected void doA() {
-        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Normality(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
-        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Regret(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
+        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Normality(), Settings.WIDTH / 2F, Settings.HEIGHT / 2F));
+        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Regret(), Settings.WIDTH / 2F, Settings.HEIGHT / 2F));
     }
 
     @Override
     protected void doB() {
-        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Writhe(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
-        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Writhe(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
+        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Writhe(), Settings.WIDTH / 2F, Settings.HEIGHT / 2F));
+        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Writhe(), Settings.WIDTH / 2F, Settings.HEIGHT / 2F));
     }
 
     @Override
     protected void doC() {
-        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Slimed(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
-        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Slimed(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
-        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Slimed(), Settings.WIDTH/2F, Settings.HEIGHT/2F));
+        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Slimed(), Settings.WIDTH / 2F, Settings.HEIGHT / 2F));
+        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Slimed(), Settings.WIDTH / 2F, Settings.HEIGHT / 2F));
+        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new Slimed(), Settings.WIDTH / 2F, Settings.HEIGHT / 2F));
     }
 
     @Override

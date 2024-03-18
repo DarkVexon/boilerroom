@@ -41,32 +41,31 @@ public class CardChomper extends AbstractBoilerRoomMonster {
 
     @Override
     public void executeTurn() {
-        switch (this.nextMove) {
-            case CHOMP:
-                addToBot(new VFXAction(new BiteEffect(player().hb.cX, player().hb.cY, Color.YELLOW)));
-                hitPlayer(AbstractGameAction.AttackEffect.NONE);
-                applyToPlayer(new LambdaPower("Hungry", AbstractPower.PowerType.DEBUFF, false, player(), 1) {
-                    @Override
-                    public void onCardDraw(AbstractCard card) {
-                        if (amount > 0) {
-                            flash();
-                            amount -= 1;
-                            if (amount <= 0) {
-                                addToTop(new RemoveSpecificPowerAction(owner, owner, this));
-                            }
-                            addToTop(new ExhaustSpecificCardAction(card, AbstractDungeon.player.hand));
+        if (this.nextMove == CHOMP) {
+            addToBot(new VFXAction(new BiteEffect(player().hb.cX, player().hb.cY, Color.YELLOW)));
+            hitPlayer(AbstractGameAction.AttackEffect.NONE);
+            applyToPlayer(new LambdaPower("Hungry", AbstractPower.PowerType.DEBUFF, false, player(), 1) {
+                @Override
+                public void onCardDraw(AbstractCard card) {
+                    if (amount > 0) {
+                        flash();
+                        amount -= 1;
+                        if (amount <= 0) {
+                            addToTop(new RemoveSpecificPowerAction(owner, owner, this));
                         }
+                        addToTop(new ExhaustSpecificCardAction(card, AbstractDungeon.player.hand));
                     }
+                }
 
-                    @Override
-                    public void updateDescription() {
-                        if (amount == 1) {
-                            description = "#yExhaust the next card you draw.";
-                        } else {
-                            description = "#yExhaust the next #b" + amount + " cards you draw.";
-                        }
+                @Override
+                public void updateDescription() {
+                    if (amount == 1) {
+                        description = "#yExhaust the next card you draw.";
+                    } else {
+                        description = "#yExhaust the next #b" + amount + " cards you draw.";
                     }
-                });
+                }
+            });
         }
     }
 

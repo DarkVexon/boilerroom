@@ -2,7 +2,6 @@ package code.events;
 
 import basemod.abstracts.events.PhasedEvent;
 import basemod.abstracts.events.phases.TextPhase;
-import code.util.TexLoader;
 
 import static code.BoilerRoomMod.makeID;
 

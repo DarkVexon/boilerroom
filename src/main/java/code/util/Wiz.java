@@ -1,10 +1,12 @@
 package code.util;
 
+import code.actions.TimedVFXAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.*;
+import com.megacrit.cardcrawl.actions.common.DiscardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -17,7 +19,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import code.actions.TimedVFXAction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,8 +27,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import static code.BoilerRoomMod.makeID;
 
 public class Wiz {
     //The wonderful Wizard of Oz allows access to most easy compilations of data, or functions.
@@ -73,7 +72,7 @@ public class Wiz {
 
     public static ArrayList<AbstractCard> getCardsMatchingPredicate(Predicate<AbstractCard> pred, boolean allcards) {
         if (allcards)
-            return (ArrayList<AbstractCard>)CardLibrary.getAllCards().stream().filter(pred).collect(Collectors.toList());
+            return (ArrayList<AbstractCard>) CardLibrary.getAllCards().stream().filter(pred).collect(Collectors.toList());
         else {
             ArrayList<AbstractCard> cardsList = new ArrayList<>();
             cardsList.addAll(AbstractDungeon.srcCommonCardPool.group);
@@ -194,7 +193,7 @@ public class Wiz {
 
     public static AbstractGameAction multiAction(AbstractGameAction... actions) {
         return actionify(() -> {
-            ArrayList<AbstractGameAction> actionsList = (ArrayList<AbstractGameAction>)Arrays.asList(actions);
+            ArrayList<AbstractGameAction> actionsList = (ArrayList<AbstractGameAction>) Arrays.asList(actions);
             Collections.reverse(actionsList);
             for (AbstractGameAction action : actions)
                 att(action);

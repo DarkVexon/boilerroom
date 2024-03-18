@@ -30,6 +30,20 @@ public class PotThing extends AbstractBoilerRoomMonster {
         addMove(ATTACK_BUFF, Intent.ATTACK_BUFF, calcAscensionDamage(12));
     }
 
+    public static void potCard(AbstractCard c) {
+        AbstractCard replacement = new PottedCard(c);
+        if (AbstractDungeon.player.drawPile.contains(c)) {
+            AbstractDungeon.player.drawPile.group.set(AbstractDungeon.player.drawPile.group.indexOf(c), replacement);
+        } else if (AbstractDungeon.player.discardPile.contains(c)) {
+            AbstractDungeon.player.discardPile.group.set(AbstractDungeon.player.discardPile.group.indexOf(c), replacement);
+        } else if (AbstractDungeon.player.hand.contains(c)) {
+            AbstractDungeon.player.hand.group.set(AbstractDungeon.player.hand.group.indexOf(c), replacement);
+        } else if (AbstractDungeon.player.masterDeck.contains(c)) {
+            AbstractDungeon.player.masterDeck.removeCard(c);
+            AbstractDungeon.player.masterDeck.addToRandomSpot(replacement);
+        }
+    }
+
     @Override
     public void usePreBattleAction() {
         applyToSelf(new LambdaPower("Ceramic Shield", AbstractPower.PowerType.BUFF, false, this, 8) {
@@ -94,20 +108,6 @@ public class PotThing extends AbstractBoilerRoomMonster {
             case ATTACK_BUFF:
                 hitPlayer(AbstractGameAction.AttackEffect.SLASH_HEAVY);
                 applyToSelf(new ThornsPower(this, calcAscensionSpecial(2)));
-        }
-    }
-
-    public static void potCard(AbstractCard c) {
-        AbstractCard replacement = new PottedCard(c);
-        if (AbstractDungeon.player.drawPile.contains(c)) {
-            AbstractDungeon.player.drawPile.group.set(AbstractDungeon.player.drawPile.group.indexOf(c), replacement);
-        } else if (AbstractDungeon.player.discardPile.contains(c)) {
-            AbstractDungeon.player.discardPile.group.set(AbstractDungeon.player.discardPile.group.indexOf(c), replacement);
-        } else if (AbstractDungeon.player.hand.contains(c)) {
-            AbstractDungeon.player.hand.group.set(AbstractDungeon.player.hand.group.indexOf(c), replacement);
-        } else if (AbstractDungeon.player.masterDeck.contains(c)) {
-            AbstractDungeon.player.masterDeck.removeCard(c);
-            AbstractDungeon.player.masterDeck.addToRandomSpot(replacement);
         }
     }
 

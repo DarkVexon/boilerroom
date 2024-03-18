@@ -17,7 +17,7 @@ public class WormLegate extends AbstractBoilerRoomMonster {
 
     private static final float[] POSX = new float[]{-600.0F, -400.0F, -200.0F, 200.0F};
     private static final float[] POSY = new float[]{0.0F, 0.0F, 0.0F, 0.0F};
-    private AbstractMonster[] worms = new Worm[4];
+    private final AbstractMonster[] worms = new Worm[4];
 
     public WormLegate(float x, float y) {
         super("Worm Legate", ID, 1, x, y, 180, 190);

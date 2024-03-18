@@ -2,19 +2,16 @@ package code.events;
 
 import code.cards.SpecterCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapRoomNode;
-import com.megacrit.cardcrawl.relics.GremlinMask;
-import com.megacrit.cardcrawl.relics.MarkOfTheBloom;
 import com.megacrit.cardcrawl.rooms.MonsterRoom;
 import com.megacrit.cardcrawl.rooms.RestRoom;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
 import java.util.ArrayList;
 
-public class BoilerEventSpecters extends AbstractBoilerRoomEvent{
+public class BoilerEventSpecters extends AbstractBoilerRoomEvent {
     public BoilerEventSpecters() {
         super("6");
     }
@@ -36,8 +33,8 @@ public class BoilerEventSpecters extends AbstractBoilerRoomEvent{
 
     @Override
     protected void doA() {
-        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new SpecterCard(), Settings.WIDTH/3, Settings.HEIGHT/2));
-        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new SpecterCard(), (Settings.WIDTH/3) * 2, Settings.HEIGHT/2));
+        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new SpecterCard(), Settings.WIDTH / 3, Settings.HEIGHT / 2));
+        AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(new SpecterCard(), (Settings.WIDTH / 3) * 2, Settings.HEIGHT / 2));
     }
 
     @Override

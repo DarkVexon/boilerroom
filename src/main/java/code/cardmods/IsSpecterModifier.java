@@ -10,7 +10,7 @@ import static code.BoilerRoomMod.makeID;
 @AbstractCardModifier.SaveIgnore
 public class IsSpecterModifier extends AbstractCardModifier {
     public static final String ID = makeID("IsGhostModifier");
-    private static UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ID);
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ID);
 
     public AbstractCard ghost;
 

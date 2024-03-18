@@ -29,24 +29,14 @@ import java.nio.charset.StandardCharsets;
 public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber {
 
     public static final String modID = "boiler";
-
-    public static String makeID(String idText) {
-        return modID + ":" + idText;
-    }
-
     public static Settings.GameLanguage[] SupportedLanguages = {Settings.GameLanguage.ENG};
-
-    private String getLangString() {
-        for (Settings.GameLanguage lang : SupportedLanguages) {
-            if (lang.equals(Settings.language)) {
-                return Settings.language.name().toLowerCase();
-            }
-        }
-        return "eng";
-    }
 
     public BoilerRoomMod() {
         BaseMod.subscribe(this);
+    }
+
+    public static String makeID(String idText) {
+        return modID + ":" + idText;
     }
 
     public static String makePath(String resourcePath) {
@@ -75,6 +65,15 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
 
     public static void initialize() {
         BoilerRoomMod thismod = new BoilerRoomMod();
+    }
+
+    private String getLangString() {
+        for (Settings.GameLanguage lang : SupportedLanguages) {
+            if (lang.equals(Settings.language)) {
+                return Settings.language.name().toLowerCase();
+            }
+        }
+        return "eng";
     }
 
     @Override

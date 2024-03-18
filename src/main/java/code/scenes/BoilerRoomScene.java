@@ -4,14 +4,11 @@ import code.util.TexLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.scenes.AbstractScene;
 
-import java.util.ArrayList;
-
 public class BoilerRoomScene extends AbstractScene {
-    private static Texture tex = TexLoader.getTexture("boilerResources/images/scene/boiler.png");
-    private static Texture campfireBg = TexLoader.getTexture("boilerResources/images/scene/camp.png");
+    private static final Texture tex = TexLoader.getTexture("boilerResources/images/scene/boiler.png");
+    private static final Texture campfireBg = TexLoader.getTexture("boilerResources/images/scene/camp.png");
 
     public BoilerRoomScene() {
         super("beyondScene/scene.atlas");

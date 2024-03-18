@@ -3,7 +3,6 @@ package code.monsters;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.animations.*;
 import com.megacrit.cardcrawl.actions.common.*;
@@ -28,12 +27,8 @@ import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Iterator;
-
 public class SlimeBossAsEnemy extends AbstractMonster {
-    private static final Logger logger = LogManager.getLogger(SlimeBoss.class.getName());
     public static final String ID = "SlimeBoss";
-    private static final MonsterStrings monsterStrings;
     public static final String NAME;
     public static final String[] MOVES;
     public static final String[] DIALOG;
@@ -43,9 +38,9 @@ public class SlimeBossAsEnemy extends AbstractMonster {
     public static final int SLAM_DAMAGE = 35;
     public static final int A_2_TACKLE_DAMAGE = 10;
     public static final int A_2_SLAM_DAMAGE = 38;
-    private int tackleDmg;
-    private int slamDmg;
     public static final int STICKY_TURNS = 3;
+    private static final Logger logger = LogManager.getLogger(SlimeBoss.class.getName());
+    private static final MonsterStrings monsterStrings;
     private static final byte SLAM = 1;
     private static final byte PREP_SLAM = 2;
     private static final byte SPLIT = 3;
@@ -54,10 +49,24 @@ public class SlimeBossAsEnemy extends AbstractMonster {
     private static final String PREP_NAME;
     private static final String SPLIT_NAME;
     private static final String STICKY_NAME;
+
+    static {
+        monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("SlimeBoss");
+        NAME = monsterStrings.NAME;
+        MOVES = monsterStrings.MOVES;
+        DIALOG = monsterStrings.DIALOG;
+        SLAM_NAME = MOVES[0];
+        PREP_NAME = MOVES[1];
+        SPLIT_NAME = MOVES[2];
+        STICKY_NAME = MOVES[3];
+    }
+
+    private final int tackleDmg;
+    private final int slamDmg;
     private boolean firstTurn = true;
 
     public SlimeBossAsEnemy(float x, float y) {
-        super(NAME, "SlimeBoss", 140, 0, 28, 400.0F, 350.0F, (String) null, x, y);
+        super(NAME, "SlimeBoss", 140, 0, 28, 400.0F, 350.0F, null, x, y);
         this.type = EnemyType.NORMAL;
         this.dialogX = -150.0F * Settings.scale;
         this.dialogY = -70.0F * Settings.scale;
@@ -89,14 +98,14 @@ public class SlimeBossAsEnemy extends AbstractMonster {
                 AbstractDungeon.actionManager.addToBottom(new AnimateJumpAction(this));
                 AbstractDungeon.actionManager.addToBottom(new VFXAction(new WeightyImpactEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, new Color(0.1F, 1.0F, 0.1F, 0.0F))));
                 AbstractDungeon.actionManager.addToBottom(new WaitAction(0.8F));
-                AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, (DamageInfo) this.damage.get(1), AttackEffect.POISON));
+                AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, this.damage.get(1), AttackEffect.POISON));
                 this.setMove(STICKY_NAME, (byte) 4, Intent.STRONG_DEBUFF);
                 break;
             case 2:
                 this.playSfx();
                 AbstractDungeon.actionManager.addToBottom(new ShoutAction(this, DIALOG[0], 1.0F, 2.0F));
                 AbstractDungeon.actionManager.addToBottom(new ShakeScreenAction(0.3F, ShakeDur.LONG, ShakeIntensity.LOW));
-                this.setMove(SLAM_NAME, (byte) 1, Intent.ATTACK, ((DamageInfo) this.damage.get(1)).base);
+                this.setMove(SLAM_NAME, (byte) 1, Intent.ATTACK, this.damage.get(1).base);
                 break;
             case 3:
                 AbstractDungeon.actionManager.addToBottom(new CannotLoseAction());
@@ -157,16 +166,5 @@ public class SlimeBossAsEnemy extends AbstractMonster {
         super.die();
         CardCrawlGame.sound.play("VO_SLIMEBOSS_2A");
 
-    }
-
-    static {
-        monsterStrings = CardCrawlGame.languagePack.getMonsterStrings("SlimeBoss");
-        NAME = monsterStrings.NAME;
-        MOVES = monsterStrings.MOVES;
-        DIALOG = monsterStrings.DIALOG;
-        SLAM_NAME = MOVES[0];
-        PREP_NAME = MOVES[1];
-        SPLIT_NAME = MOVES[2];
-        STICKY_NAME = MOVES[3];
     }
 }

@@ -18,16 +18,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractBoilerRoomMonster extends CustomMonster {
-    protected Map<Byte, EnemyMoveInfo> moves;
-    protected boolean firstMove = true;
-    protected int turns = 1;
     private static final float ASCENSION_DAMAGE_BUFF_PERCENT = 1.10f;
     private static final float ASCENSION_TANK_BUFF_PERCENT = 1.10f;
     private static final float ASCENSION_SPECIAL_BUFF_PERCENT = 1.5f;
+    protected Map<Byte, EnemyMoveInfo> moves;
+    protected boolean firstMove = true;
+    protected int turns = 1;
+    protected DamageInfo info;
+    protected int multiplier;
 
     public AbstractBoilerRoomMonster(String name, String id, int maxHealth, float hb_x, float hb_y, float hb_w, float hb_h) {
         super(name, id, maxHealth, 0, 0, hb_w, hb_h, "boilerResources/images/foe/" + id.replaceAll("boiler:", "") + ".png", hb_x, hb_y);
         setUpMisc();
+    }
+
+    protected static AbstractMonster randomAlly() {
+        return Wiz.getRandomItem(Wiz.getEnemies());
     }
 
     protected void setUpMisc() {
@@ -132,9 +138,6 @@ public abstract class AbstractBoilerRoomMonster extends CustomMonster {
         super.die(triggerRelics);
     }
 
-    protected DamageInfo info;
-    protected int multiplier;
-
     @Override
     public void takeTurn() {
         info = new DamageInfo(this, this.moves.get(nextMove).baseDamage, DamageInfo.DamageType.NORMAL);
@@ -154,10 +157,6 @@ public abstract class AbstractBoilerRoomMonster extends CustomMonster {
         for (int i = 0; i < Math.max(multiplier, 1); i++) {
             addToBot(new DamageAction(AbstractDungeon.player, info, effect));
         }
-    }
-
-    protected static AbstractMonster randomAlly() {
-        return Wiz.getRandomItem(Wiz.getEnemies());
     }
 
     protected AbstractPlayer player() {

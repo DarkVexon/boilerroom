@@ -69,8 +69,8 @@ public class DumDumPatches {
             method = "refreshHandLayout"
     )
     public static class OnRefreshHandCheckToPlayCardPatch {
-        static ReflectionHacks.RMethod playCard;
         public static boolean isEndingTurn;
+        static ReflectionHacks.RMethod playCard;
 
         @SpireInsertPatch(
                 locator = Locator.class

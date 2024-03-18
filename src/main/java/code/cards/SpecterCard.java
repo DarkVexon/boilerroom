@@ -6,7 +6,6 @@ import code.util.Wiz;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -29,6 +28,19 @@ public class SpecterCard extends AbstractEasyCard implements StartupCard {
         exhaust = true;
     }
 
+    private static String scream() {
+        int roll = MathUtils.random(1);
+        if (roll == 0) {
+            return "VO_NEMESIS_2A";
+        } else {
+            return "VO_NEMESIS_2B";
+        }
+    }
+
+    private static boolean canDisguiseAs(AbstractCard target) {
+        return target.cost != -2 && !target.cardID.equals(SpecterCard.ID) && !CardModifierManager.hasModifier(target, IsSpecterModifier.ID);
+    }
+
     @Override
     public boolean canUpgrade() {
         return false;
@@ -41,20 +53,6 @@ public class SpecterCard extends AbstractEasyCard implements StartupCard {
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
         atb(new SFXAction(scream()));
-    }
-
-    private static String scream() {
-        int roll = MathUtils.random(1);
-        if (roll == 0) {
-            return "VO_NEMESIS_2A";
-        } else {
-            return "VO_NEMESIS_2B";
-        }
-    }
-
-
-    private static boolean canDisguiseAs(AbstractCard target) {
-        return target.cost != -2 && !target.cardID.equals(SpecterCard.ID) && !CardModifierManager.hasModifier(target, IsSpecterModifier.ID);
     }
 
     @Override
