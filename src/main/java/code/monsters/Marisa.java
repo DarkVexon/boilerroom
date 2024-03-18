@@ -27,7 +27,7 @@ public class Marisa extends AbstractBoilerRoomMonster {
 
     public Marisa(float x, float y) {
         super("Marisa from Touhou", ID, 1, x, y, 333, 325);
-        setHp(calcAscensionTankiness(192), calcAscensionTankiness(201));
+        setHp(calcAscensionTankiness(184), calcAscensionTankiness(194));
 
         addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(4));
     }

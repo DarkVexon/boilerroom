@@ -1,10 +1,13 @@
 package code.monsters;
 
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.AnimateHopAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.BufferPower;
 import com.megacrit.cardcrawl.powers.IntangiblePower;
 
@@ -32,7 +35,9 @@ public class Gnat extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
-        applyToSelf(new IntangiblePower(this, 99));
+        AbstractPower p = new IntangiblePower(this, 99);
+        ReflectionHacks.setPrivate(p, IntangiblePower.class, "justApplied", false);
+        applyToSelf(p);
         int bufferAmount = AbstractDungeon.monsterRng.random(0, 3);
         if (AbstractDungeon.ascensionLevel >= 17) {
             bufferAmount += 1;
@@ -55,7 +60,14 @@ public class Gnat extends AbstractBoilerRoomMonster {
         } else {
             this.drawY = baseDrawY + -MathUtils.cosDeg((float) (System.currentTimeMillis() / 6L % 360L)) * 6.0F * Settings.scale;
         }
+    }
 
+    public void damage(DamageInfo info) {
+        if (info.output > 0 && this.hasPower("Intangible")) {
+            info.output = 1;
+        }
+
+        super.damage(info);
     }
 
     @Override
