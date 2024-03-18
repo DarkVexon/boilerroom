@@ -32,8 +32,10 @@ public class BoilerEventRightmostTwoRelics extends AbstractBoilerRoomEvent {
 
     @Override
     protected void doA() {
-        AbstractDungeon.player.loseRelic(AbstractDungeon.player.relics.get(AbstractDungeon.player.relics.size() - 1).relicId);
-        AbstractDungeon.player.loseRelic(AbstractDungeon.player.relics.get(AbstractDungeon.player.relics.size() - 1).relicId);
+        if (!AbstractDungeon.player.relics.isEmpty())
+            AbstractDungeon.player.loseRelic(AbstractDungeon.player.relics.get(AbstractDungeon.player.relics.size() - 1).relicId);
+        if (!AbstractDungeon.player.relics.isEmpty())
+            AbstractDungeon.player.loseRelic(AbstractDungeon.player.relics.get(AbstractDungeon.player.relics.size() - 1).relicId);
     }
 
     @Override

@@ -4,14 +4,16 @@ import code.util.Wiz;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.powers.FrailPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.powers.watcher.EnergyDownPower;
-import com.megacrit.cardcrawl.vfx.FadeWipeParticle;
+import com.megacrit.cardcrawl.rooms.*;
 
 import java.util.ArrayList;
 
@@ -27,8 +29,8 @@ public class PortalWielder extends AbstractBoilerRoomMonster {
     private static final byte SETBACK = 2;
 
     public PortalWielder(float x, float y) {
-        super(NAME, ID, 1, x, y, 100, 100);
-        setHp(calcAscensionTankiness(240), calcAscensionTankiness(252));
+        super("Portal Wielder", ID, 1, x, y, 290, 375);
+        setHp(calcAscensionTankiness(133), calcAscensionTankiness(143));
 
         addMove(DEBUFFS, Intent.DEBUFF);
         addMove(MAXHPDRAIN, Intent.ATTACK_DEBUFF, calcAscensionDamage(10));
@@ -84,16 +86,35 @@ public class PortalWielder extends AbstractBoilerRoomMonster {
                             targetHeight -= 1;
                         }
                         if (!valids.isEmpty()) {
+                            AbstractRoom room = AbstractDungeon.getCurrRoom();
+                            room.rewardAllowed = false;
                             AbstractDungeon.getCurrRoom().endBattle();
                             MapRoomNode toTravelTo = Wiz.getRandomItem(valids, AbstractDungeon.monsterRng);
-                            playMapNodeSelectedSound();
-                            AbstractDungeon.dungeonMapScreen.clicked = false;
-                            AbstractDungeon.dungeonMapScreen.clickTimer = 0.0F;
-                            AbstractDungeon.topLevelEffects.add(new FadeWipeParticle());
-                            AbstractDungeon.setCurrMapNode(toTravelTo);
-                            AbstractDungeon.nextRoom = toTravelTo;
-                            AbstractDungeon.nextRoomTransitionStart();
-                            CardCrawlGame.music.fadeOutTempBGM();
+                            for (ArrayList<MapRoomNode> r : AbstractDungeon.map) {
+                                for (MapRoomNode n : r) {
+                                    if (n != toTravelTo && n.y > toTravelTo.y && n.taken) {
+                                        n.taken = false;
+                                        if (n.room instanceof MonsterRoomElite) {
+                                            n.room = new MonsterRoomElite();
+                                        } else if (n.room instanceof ShopRoom) {
+                                            n.room = new ShopRoom();
+                                        } else if (n.room instanceof MonsterRoom) {
+                                            n.room = new MonsterRoom();
+                                        } else if (n.room instanceof EventRoom) {
+                                            n.room = new EventRoom();
+                                        } else if (n.room instanceof TreasureRoom) {
+                                            n.room = new MonsterRoom();
+                                        }
+                                    }
+                                }
+                            }
+                            MapRoomNode prevNode = AbstractDungeon.currMapNode;
+                            AbstractDungeon.currMapNode = toTravelTo;
+                            AbstractDungeon.currMapNode.room = room;
+                            prevNode.room = new MonsterRoomElite();
+                        } else {
+                            addToTop(new ApplyPowerAction(PortalWielder.this, PortalWielder.this, new StrengthPower(PortalWielder.this, 10), 10));
+                            addToTop(new TalkAction(PortalWielder.this, "You're too close to the floor to portal you... I'll just gain Strength.", 2.0F, 2.0F));
                         }
                     }
                 });

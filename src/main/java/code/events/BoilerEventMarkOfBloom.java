@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.GremlinMask;
 import com.megacrit.cardcrawl.relics.MarkOfTheBloom;
 
-public class BoilerEventMarkOfBloom extends AbstractBoilerRoomEvent{
+public class BoilerEventMarkOfBloom extends AbstractBoilerRoomEvent {
     public BoilerEventMarkOfBloom() {
         super("3");
     }
@@ -27,14 +27,16 @@ public class BoilerEventMarkOfBloom extends AbstractBoilerRoomEvent{
 
     @Override
     protected void doA() {
-        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH/2F, Settings.HEIGHT/2F, new MarkOfTheBloom());
-        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH/2F, Settings.HEIGHT/2F, new GremlinMask());
+        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2F, Settings.HEIGHT / 2F, new MarkOfTheBloom());
+        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2F, Settings.HEIGHT / 2F, new GremlinMask());
     }
 
     @Override
     protected void doB() {
-        AbstractDungeon.player.loseRelic(AbstractDungeon.player.relics.get(0).relicId);
-        AbstractDungeon.player.loseRelic(AbstractDungeon.player.relics.get(0).relicId);
+        if (!AbstractDungeon.player.relics.isEmpty())
+            AbstractDungeon.player.loseRelic(AbstractDungeon.player.relics.get(0).relicId);
+        if (!AbstractDungeon.player.relics.isEmpty())
+            AbstractDungeon.player.loseRelic(AbstractDungeon.player.relics.get(0).relicId);
     }
 
     @Override

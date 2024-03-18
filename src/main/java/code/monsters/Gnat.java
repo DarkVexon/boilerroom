@@ -22,7 +22,7 @@ public class Gnat extends AbstractBoilerRoomMonster {
 
     public Gnat(float x, float y) {
         super(NAME, ID, 1, x, y, 55, 40);
-        baseDrawY = y;
+        baseDrawY = this.drawY;
         setHp(calcAscensionTankiness(2), calcAscensionTankiness(4));
 
         addMove(SKIP, Intent.UNKNOWN);

@@ -15,7 +15,7 @@ public class GnatMonsterGroup extends MonsterGroup {
         int i = 0;
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 5; y++) {
-                gnats[i] = new Gnat(-675 + (100 * x) + MathUtils.random(-30, 30), 50 + (110 * y) + MathUtils.random(-33, 33));
+                gnats[i] = new Gnat(-650 + (100 * x) + MathUtils.random(-30, 30), 50 + (110 * y) + MathUtils.random(-33, 33));
                 i++;
             }
         }

@@ -15,7 +15,7 @@ public class AddSlingBoyPatches {
         @SpirePrefixPatch
         public static void startOfCombat(AbstractPlayer __instance) {
             if (AbstractDungeon.bossKey.equals(SlingBoy.ID) && !(AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss)) {
-                AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new InvisibleSlingBoy(250, 525), false));
+                AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new InvisibleSlingBoy(-766, 475), false, 0));
             }
         }
     }
