@@ -78,6 +78,7 @@ public class BoilerRoom extends CustomDungeon {
         monsters.add(new MonsterInfo(Marisa.ID, 1.0F));
         monsters.add(new MonsterInfo(makeID("StinkyChompCraig"), 1.0F));
         monsters.add(new MonsterInfo(makeID("IncenseSludgeStink"), 1.0F));
+        monsters.add(new MonsterInfo(WormLegate.ID, 1.0F));
         MonsterInfo.normalizeWeights(monsters);
         this.populateFirstStrongEnemy(monsters, this.generateExclusions());
         this.populateMonsterList(monsters, count, false);
@@ -88,7 +89,7 @@ public class BoilerRoom extends CustomDungeon {
         ArrayList<MonsterInfo> monsters = new ArrayList<>();
         monsters.add(new MonsterInfo(GumGum.ID, 1.0F));
         monsters.add(new MonsterInfo(Lagavulin2.ID, 1.0F));
-        monsters.add(new MonsterInfo(WormLegate.ID, 1.0F));
+        monsters.add(new MonsterInfo(PortalWielder.ID, 1.0F));
         MonsterInfo.normalizeWeights(monsters);
         this.populateMonsterList(monsters, count, true);
     }

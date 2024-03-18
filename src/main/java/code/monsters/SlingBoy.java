@@ -38,6 +38,7 @@ public class SlingBoy extends AbstractBoilerRoomMonster {
         applyToSelf(new ArtifactPower(this, 150));
         applyToSelf(new MetallicizePower(this, calcAscensionSpecial(15)));
         applyToSelf(new PlatedArmorPower(this, calcAscensionSpecial(20)));
+        applyToSelf(new ThornsPower(this, 1));
         addToBot(new GainBlockAction(this, calcAscensionSpecial(35)));
         applyToSelf(new BarricadePower(this));
         addToBot(new TalkAction(this, "RUNNING PROCESS: POT_CARDS...", 0.5F, 2.0F));

@@ -162,15 +162,19 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
         }));
 
         BaseMod.addMonster(GumGum.ID, () -> new MonsterGroup(new AbstractMonster[]{
-                new GumGum(0, 0)
+                new GumGum(-10, -1)
         }));
 
         BaseMod.addMonster(Lagavulin2.ID, () -> new MonsterGroup(new AbstractMonster[]{
-                new Lagavulin2(0, 0)
+                new Lagavulin2(-30, 0)
         }));
 
         BaseMod.addMonster(WormLegate.ID, () -> new MonsterGroup(new AbstractMonster[]{
                 new WormLegate(0, 0)
+        }));
+
+        BaseMod.addMonster(PortalWielder.ID, () -> new MonsterGroup(new AbstractMonster[]{
+                new PortalWielder(-125, 0)
         }));
 
         BaseMod.addEvent("boiler:FellInBoiler1", BoilerEventCurses.class, BoilerRoom.ID);

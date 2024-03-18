@@ -1,7 +1,9 @@
 package code.monsters;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.AnimateHopAction;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.BufferPower;
 import com.megacrit.cardcrawl.powers.IntangiblePower;
@@ -16,8 +18,11 @@ public class Gnat extends AbstractBoilerRoomMonster {
     public static final byte ATTACK_TINY = 1;
     public static final byte ATTACK_REGULAR = 2;
 
+    private float baseDrawY;
+
     public Gnat(float x, float y) {
         super(NAME, ID, 1, x, y, 55, 40);
+        baseDrawY = y;
         setHp(calcAscensionTankiness(2), calcAscensionTankiness(4));
 
         addMove(SKIP, Intent.UNKNOWN);
@@ -41,6 +46,16 @@ public class Gnat extends AbstractBoilerRoomMonster {
     protected void setUpMisc() {
         super.setUpMisc();
         this.type = EnemyType.NORMAL;
+    }
+
+    public void update() {
+        super.update();
+        if (this.maxHealth == 2) {
+            this.drawY = baseDrawY + MathUtils.cosDeg((float) (System.currentTimeMillis() / 6L % 360L)) * 6.0F * Settings.scale;
+        } else {
+            this.drawY = baseDrawY + -MathUtils.cosDeg((float) (System.currentTimeMillis() / 6L % 360L)) * 6.0F * Settings.scale;
+        }
+
     }
 
     @Override
