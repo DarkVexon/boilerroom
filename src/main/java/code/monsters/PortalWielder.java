@@ -1,12 +1,14 @@
 package code.monsters;
 
 import code.util.Wiz;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.map.MapEdge;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.powers.FrailPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
@@ -15,6 +17,7 @@ import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.powers.watcher.EnergyDownPower;
 import com.megacrit.cardcrawl.rooms.*;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import static code.BoilerRoomMod.makeID;
@@ -30,7 +33,7 @@ public class PortalWielder extends AbstractBoilerRoomMonster {
 
     public PortalWielder(float x, float y) {
         super("Portal Wielder", ID, 1, x, y, 290, 375);
-        setHp(calcAscensionTankiness(133), calcAscensionTankiness(143));
+        setHp(calcAscensionTankiness(152), calcAscensionTankiness(157));
 
         addMove(DEBUFFS, Intent.DEBUFF);
         addMove(MAXHPDRAIN, Intent.ATTACK_DEBUFF, calcAscensionDamage(10));
@@ -92,8 +95,12 @@ public class PortalWielder extends AbstractBoilerRoomMonster {
                             MapRoomNode toTravelTo = Wiz.getRandomItem(valids, AbstractDungeon.monsterRng);
                             for (ArrayList<MapRoomNode> r : AbstractDungeon.map) {
                                 for (MapRoomNode n : r) {
-                                    if (n != toTravelTo && n.y > toTravelTo.y && n.taken) {
+                                    if (n != toTravelTo && n.y >= toTravelTo.y && n.taken) {
                                         n.taken = false;
+                                        for (MapEdge e : n.getEdges()) {
+                                            e.taken = false;
+                                            e.color = new Color(0.34F, 0.34F, 0.34F, 1.0F);
+                                        }
                                         if (n.room instanceof MonsterRoomElite) {
                                             n.room = new MonsterRoomElite();
                                         } else if (n.room instanceof ShopRoom) {
@@ -104,14 +111,47 @@ public class PortalWielder extends AbstractBoilerRoomMonster {
                                             n.room = new EventRoom();
                                         } else if (n.room instanceof TreasureRoom) {
                                             n.room = new MonsterRoom();
+                                        } else if (n.room instanceof RestRoom) {
+                                            n.room = new MonsterRoom();
+                                        } else {
+                                            try {
+                                                n.room = n.room.getClass().newInstance();
+                                            } catch (Exception e) {
+                                                n.room = new MonsterRoom();
+                                            }
                                         }
                                     }
                                 }
                             }
                             MapRoomNode prevNode = AbstractDungeon.currMapNode;
+                            prevNode.taken = false;
                             AbstractDungeon.currMapNode = toTravelTo;
+                            AbstractDungeon.nextRoom = toTravelTo;
+                            toTravelTo.taken = true;
                             AbstractDungeon.currMapNode.room = room;
+                            AbstractDungeon.pathX.clear();
+                            AbstractDungeon.pathY.clear();
+                            AbstractDungeon.pathX.add(toTravelTo.x);
+                            AbstractDungeon.pathY.add(toTravelTo.y);
                             prevNode.room = new MonsterRoomElite();
+
+                            if (AbstractDungeon.monsterList.size() <= 1 && CardCrawlGame.dungeon != null) {
+                                try {
+                                    Method m = AbstractDungeon.class.getDeclaredMethod("generateStrongEnemies", int.class);
+
+                                    m.setAccessible(true);
+
+                                    m.invoke(CardCrawlGame.dungeon, 12);
+
+                                    if (AbstractDungeon.monsterList.size() == 1) //this did nothing. Add a copy.
+                                    {
+                                        String theOnlyMonster = "" + AbstractDungeon.monsterList.get(0);
+                                        AbstractDungeon.monsterList.add(theOnlyMonster);
+                                    }
+                                } catch (Exception e) {
+
+                                }
+                            }
                         } else {
                             addToTop(new ApplyPowerAction(PortalWielder.this, PortalWielder.this, new StrengthPower(PortalWielder.this, 10), 10));
                             addToTop(new TalkAction(PortalWielder.this, "You're too close to the floor to portal you... I'll just gain Strength.", 2.0F, 2.0F));

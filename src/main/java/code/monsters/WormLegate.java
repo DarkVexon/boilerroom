@@ -21,7 +21,7 @@ public class WormLegate extends AbstractBoilerRoomMonster {
 
     public WormLegate(float x, float y) {
         super("Worm Legate", ID, 1, x, y, 180, 190);
-        setHp(calcAscensionTankiness(140), calcAscensionTankiness(160));
+        setHp(calcAscensionTankiness(131), calcAscensionTankiness(141));
 
         addMove(SUMMON_WORMS, Intent.UNKNOWN);
         addMove(SUMMON_WORM, Intent.ATTACK_BUFF, calcAscensionDamage(14));
@@ -45,7 +45,7 @@ public class WormLegate extends AbstractBoilerRoomMonster {
                 for (int i = 0; i < 2; i++) {
                     Worm newWorm = new Worm(POSX[i], POSY[i]);
                     worms[i] = newWorm;
-                    addToBot(new SpawnMonsterAction(newWorm, false));
+                    addToBot(new SpawnMonsterAction(newWorm, true));
                 }
                 break;
             case SUMMON_WORM:
@@ -55,7 +55,7 @@ public class WormLegate extends AbstractBoilerRoomMonster {
                     if (worms[i] == null || worms[i].isDeadOrEscaped()) {
                         Worm newWorm = new Worm(POSX[i], POSY[i]);
                         worms[i] = newWorm;
-                        addToBot(new SpawnMonsterAction(newWorm, false));
+                        addToBot(new SpawnMonsterAction(newWorm, true));
                         break;
                     } else {
                         i++;
