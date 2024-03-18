@@ -136,7 +136,8 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
 
         BaseMod.addMonster("boiler:FiftyGnats", "Fifty Fucking Gnats", GnatMonsterGroup::new);
         BaseMod.addMonster("boiler:IncenseClockPot", "Clockling and Friends", () -> new MonsterGroup(new AbstractMonster[]{
-                new IncenseSkittler(-525, 0),
+                new Worm(-550, 0),
+                new Gnat(-300, 250),
                 new Clockling(-140, 10),
                 new PotThing(150, 0)
         }));
