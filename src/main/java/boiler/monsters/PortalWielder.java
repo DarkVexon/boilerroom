@@ -81,7 +81,7 @@ public class PortalWielder extends AbstractBoilerRoomMonster {
                         while (valids.isEmpty() && targetHeight >= 0) {
                             for (ArrayList<MapRoomNode> r : AbstractDungeon.map) {
                                 for (MapRoomNode n : r) {
-                                    if (n.y == targetHeight) {
+                                    if (n.y == targetHeight && !n.taken) {
                                         valids.add(n);
                                     }
                                 }
