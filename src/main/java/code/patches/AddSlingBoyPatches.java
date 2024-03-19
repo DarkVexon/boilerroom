@@ -7,15 +7,16 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.actions.common.SpawnMonsterAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 
 public class AddSlingBoyPatches {
-    @SpirePatch(clz = AbstractPlayer.class, method = "applyStartOfCombatLogic")
+    @SpirePatch(clz = MonsterGroup.class, method = "init")
     public static class StartOfCombatPatch {
         @SpirePrefixPatch
-        public static void startOfCombat(AbstractPlayer __instance) {
+        public static void startOfCombat(MonsterGroup __instance) {
             if (AbstractDungeon.bossKey.equals(SlingBoy.ID) && !(AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss)) {
-                AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new InvisibleSlingBoy(-766, 475), false, 0));
+                __instance.monsters.add(0, new InvisibleSlingBoy(-766, 475));
             }
         }
     }

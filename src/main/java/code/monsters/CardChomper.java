@@ -25,7 +25,7 @@ public class CardChomper extends AbstractBoilerRoomMonster {
         super("Chomperchompy", ID, 1, x, y, 120, 120);
         setHp(calcAscensionTankiness(39), calcAscensionTankiness(42));
 
-        addMove(CHOMP, Intent.ATTACK_DEBUFF, calcAscensionDamage(4), 2);
+        addMove(CHOMP, Intent.ATTACK_DEBUFF, calcAscensionDamage(3), 2);
     }
 
     @Override

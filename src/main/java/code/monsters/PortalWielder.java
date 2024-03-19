@@ -33,7 +33,7 @@ public class PortalWielder extends AbstractBoilerRoomMonster {
 
     public PortalWielder(float x, float y) {
         super("Portal Wielder", ID, 1, x, y, 290, 375);
-        setHp(calcAscensionTankiness(152), calcAscensionTankiness(157));
+        setHp(calcAscensionTankiness(131), calcAscensionTankiness(140));
 
         addMove(DEBUFFS, Intent.DEBUFF);
         addMove(MAXHPDRAIN, Intent.ATTACK_DEBUFF, calcAscensionDamage(10));

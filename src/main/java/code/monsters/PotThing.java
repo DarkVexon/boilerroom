@@ -24,7 +24,7 @@ public class PotThing extends AbstractBoilerRoomMonster {
 
     public PotThing(float x, float y) {
         super("Pot Thing", ID, 1, x, y, 140, 160);
-        setHp(calcAscensionTankiness(54), calcAscensionTankiness(61));
+        setHp(calcAscensionTankiness(48), calcAscensionTankiness(56));
 
         addMove(POT_STUFF, Intent.DEBUFF);
         addMove(ATTACK_BUFF, Intent.ATTACK_BUFF, calcAscensionDamage(12));
@@ -46,7 +46,7 @@ public class PotThing extends AbstractBoilerRoomMonster {
 
     @Override
     public void usePreBattleAction() {
-        applyToSelf(new LambdaPower("Ceramic Shield", AbstractPower.PowerType.BUFF, false, this, 8) {
+        applyToSelf(new LambdaPower("Ceramic Shield", AbstractPower.PowerType.BUFF, false, this, 9) {
             @Override
             public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
                 if (info.owner != null && info.type != DamageInfo.DamageType.HP_LOSS && damageAmount > amount) {
