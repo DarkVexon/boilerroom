@@ -2,6 +2,7 @@ package boiler.cards;
 
 import boiler.actions.RepeatCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.colorless.Madness;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -17,14 +18,21 @@ public class PottedCard extends AbstractEasyCard {
     }
 
     public PottedCard(AbstractCard input) {
-        super(ID, input.cost, CardType.SKILL, CardRarity.SPECIAL, CardTarget.NONE, CardColor.COLORLESS);
-        this.held = input;
-        rawDescription = "Play the " + input.cost + " cost card in this Pot.";
-        if (input.type == CardType.POWER || input.exhaust) {
+        super(ID, input == null ? 0 : input.cost, CardType.SKILL, CardRarity.SPECIAL, CardTarget.NONE, CardColor.COLORLESS);
+        if (input == null) {
+            this.held = new Madness();
+            rawDescription = "Congratulations, you created a glitched Pot. NL Play Madness. NL Exhaust.";
             this.exhaust = true;
-            rawDescription = rawDescription + " NL Exhaust.";
+            initializeDescription();
+        } else {
+            this.held = input;
+            rawDescription = "Play the " + input.cost + " cost card in this Pot.";
+            if (input.type == CardType.POWER || input.exhaust) {
+                this.exhaust = true;
+                rawDescription = rawDescription + " NL Exhaust.";
+            }
+            initializeDescription();
         }
-        initializeDescription();
     }
 
     @Override

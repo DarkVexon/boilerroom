@@ -22,7 +22,7 @@ public class GumGum extends AbstractBoilerRoomMonster {
 
     public GumGum(float x, float y) {
         super("Immortal Thinker", ID, 1, x, y, 300, 260);
-        setHp(calcAscensionTankiness(215), calcAscensionTankiness(236));
+        setHp(calcAscensionTankiness(202), calcAscensionTankiness(213));
 
         addMove(DUMDUM, Intent.STRONG_DEBUFF);
         addMove(CURIOUS, Intent.UNKNOWN);

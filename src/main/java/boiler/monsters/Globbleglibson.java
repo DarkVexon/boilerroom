@@ -36,7 +36,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
         addMove(LAMEIFY, Intent.DEFEND_DEBUFF);
         addMove(SUMMONSLIMEBOSS, Intent.UNKNOWN);
         addMove(SQUASH, Intent.DEBUFF);
-        addMove(DEBUFFS, Intent.ATTACK_DEBUFF, calcAscensionDamage(16));
+        addMove(DEBUFFS, Intent.ATTACK_DEBUFF, calcAscensionDamage(15));
     }
 
     @Override
@@ -92,7 +92,7 @@ public class Globbleglibson extends AbstractBoilerRoomMonster {
                     hitPlayer(AbstractGameAction.AttackEffect.BLUNT_HEAVY);
                 } else {
                     addToBot(new TalkAction(this, "I think... you should... have rested.", 0.5F, 1.5F));
-                    applyToSelf(new AngerPower(this, 2));
+                    applyToSelf(new AngerPower(this, 1));
                 }
                 break;
             case LAMEIFY:

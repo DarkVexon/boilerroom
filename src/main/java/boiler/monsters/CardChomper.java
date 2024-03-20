@@ -23,7 +23,7 @@ public class CardChomper extends AbstractBoilerRoomMonster {
 
     public CardChomper(float x, float y) {
         super("Chomperchompy", ID, 1, x, y, 120, 120);
-        setHp(calcAscensionTankiness(36), calcAscensionTankiness(40));
+        setHp(calcAscensionTankiness(35), calcAscensionTankiness(40));
 
         addMove(CHOMP, Intent.ATTACK_DEBUFF, calcAscensionDamage(3), 2);
     }

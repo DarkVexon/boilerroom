@@ -1,6 +1,7 @@
 package boiler.monsters;
 
 import boiler.cards.PottedCard;
+import boiler.powers.LambdaPower;
 import boiler.util.Wiz;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
@@ -25,7 +26,7 @@ public class SlingBoy extends AbstractBoilerRoomMonster {
         super("Sling Boy", ID, 1, 0, 0, 200, 200);
         setHp(calcAscensionTankiness(222), calcAscensionTankiness(222));
 
-        addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(7));
+        addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(6));
         addMove(DEBUFF, Intent.DEBUFF);
     }
 
@@ -35,10 +36,21 @@ public class SlingBoy extends AbstractBoilerRoomMonster {
         AbstractDungeon.scene.fadeOutAmbiance();
         AbstractDungeon.getCurrRoom().playBgmInstantly("boiler_boss");
         addToBot(new TalkAction(this, "pshh-vrttt... ERROR! FOE HAS APPROACHED!", 0.5F, 2.0F));
-        applyToSelf(new ArtifactPower(this, 150));
+        applyToSelf(new ArtifactPower(this, calcAscensionSpecial(12)));
         applyToSelf(new MetallicizePower(this, calcAscensionSpecial(15)));
         applyToSelf(new PlatedArmorPower(this, calcAscensionSpecial(20)));
         applyToSelf(new ThornsPower(this, 1));
+        applyToSelf(new LambdaPower("No Fun Allowed", AbstractPower.PowerType.BUFF, false, this, -1) {
+            @Override
+            protected boolean canGoNegative() {
+                return false;
+            }
+
+            @Override
+            public void updateDescription() {
+                description = "You can't draw cards or gain Energy during your turn.";
+            }
+        });
         addToBot(new GainBlockAction(this, calcAscensionSpecial(35)));
         applyToSelf(new BarricadePower(this));
         addToBot(new TalkAction(this, "RUNNING PROCESS: POT_CARDS...", 0.5F, 2.0F));

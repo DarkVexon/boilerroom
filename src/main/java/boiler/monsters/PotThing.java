@@ -26,7 +26,7 @@ public class PotThing extends AbstractBoilerRoomMonster {
     public PotThing(float x, float y, boolean attacksFirst) {
         super("Pot Thing", ID, 1, x, y, 140, 160);
         this.attacksFirst = attacksFirst;
-        setHp(calcAscensionTankiness(48), calcAscensionTankiness(56));
+        setHp(calcAscensionTankiness(46), calcAscensionTankiness(54));
 
         addMove(POT_STUFF, Intent.DEBUFF);
         addMove(ATTACK_BUFF, Intent.ATTACK_BUFF, calcAscensionDamage(12));

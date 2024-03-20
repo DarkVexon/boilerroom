@@ -61,7 +61,7 @@ public class PortalWielder extends AbstractBoilerRoomMonster {
                     @Override
                     public void update() {
                         isDone = true;
-                        AbstractDungeon.player.decreaseMaxHealth(calcAscensionDamage(10));
+                        AbstractDungeon.player.loseGold(calcAscensionSpecial(30));
                     }
                 });
                 break;
@@ -186,9 +186,9 @@ public class PortalWielder extends AbstractBoilerRoomMonster {
             setMoveShortcut(DEBUFFS);
         } else {
             if (lastTwoMoves(MAXHPDRAIN)) {
-                setMoveShortcut(SETBACK);
+                setMoveShortcut(SETBACK, "Back You Go");
             } else {
-                setMoveShortcut(MAXHPDRAIN, "Max-HP Burn");
+                setMoveShortcut(MAXHPDRAIN, "Gold-Draining Slice");
             }
         }
     }

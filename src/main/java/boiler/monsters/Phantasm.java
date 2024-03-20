@@ -129,14 +129,14 @@ public class Phantasm extends AbstractBoilerRoomMonster {
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
-                        applyToSelf(new ArtifactPower(this, 10));
+                        applyToSelf(new ArtifactPower(this, 5));
                         revives -= 1;
                         break;
                     case 3:
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
-                        applyToSelf(new ArtifactPower(this, 10));
+                        applyToSelf(new ArtifactPower(this, 5));
                         applyToSelf(new MalleablePower(this, 10));
                         revives -= 1;
                         break;
@@ -144,7 +144,7 @@ public class Phantasm extends AbstractBoilerRoomMonster {
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
-                        applyToSelf(new ArtifactPower(this, 10));
+                        applyToSelf(new ArtifactPower(this, 5));
                         applyToSelf(new MalleablePower(this, 10));
                         applyToSelf(new BufferPower(this, 5));
                         revives -= 1;
@@ -153,7 +153,7 @@ public class Phantasm extends AbstractBoilerRoomMonster {
                         maxHealth = Math.round(maxHealth / 2F);
                         halfDead = false;
                         addToBot(new HealAction(this, this, this.maxHealth));
-                        applyToSelf(new ArtifactPower(this, 10));
+                        applyToSelf(new ArtifactPower(this, 5));
                         applyToSelf(new MalleablePower(this, 10));
                         applyToSelf(new BufferPower(this, 5));
                         applyToSelf(new IntangiblePower(this, 5));

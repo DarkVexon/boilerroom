@@ -22,7 +22,7 @@ public class InvisibleSlingBoy extends AbstractBoilerRoomMonster {
 
     public InvisibleSlingBoy(float x, float y) {
         super("Sling Boy's Attack!", ID, 1, x, y, 175, 50);
-        addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(7));
+        addMove(ATTACK, Intent.ATTACK, calcAscensionDamage(6));
         addMove(DEBUFF, Intent.DEBUFF);
         powers.add(new LambdaPower("Remote Attacker", NeutralPowertypePatch.NEUTRAL, false, this, -1) {
             @Override
