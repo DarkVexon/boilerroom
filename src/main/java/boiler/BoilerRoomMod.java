@@ -176,6 +176,9 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
         BaseMod.addMonster(PortalWielder.ID, () -> new MonsterGroup(new AbstractMonster[]{
                 new PortalWielder(-125, 0)
         }));
+        BaseMod.addMonster(Shedinja.ID, () -> new MonsterGroup(new AbstractMonster[]{
+                new Shedinja(0, 100.0f)
+        }));
 
         BaseMod.addEvent("boiler:FellInBoiler1", BoilerEventCurses.class, BoilerRoom.ID);
         BaseMod.addEvent("boiler:FellInBoiler2", BoilerEventRightmostTwoRelics.class, BoilerRoom.ID);
@@ -183,5 +186,6 @@ public class BoilerRoomMod implements EditCardsSubscriber, EditRelicsSubscriber,
         BaseMod.addEvent("boiler:FellInBoiler4", BoilerEventMaxHandSize.class, BoilerRoom.ID);
         BaseMod.addEvent("boiler:FellInBoiler5", BoilerEventPots.class, BoilerRoom.ID);
         BaseMod.addEvent("boiler:FellInBoiler6", BoilerEventSpecters.class, BoilerRoom.ID);
+        BaseMod.addEvent(BoilerShedinja.ID, BoilerShedinja.class, BoilerRoom.ID);
     }
 }
